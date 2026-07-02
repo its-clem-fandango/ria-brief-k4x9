@@ -173,6 +173,14 @@
   .tour-btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
   .tour-btn.primary:hover{background:#0f3d2c}
 
+  @media print{
+    #login,#spot,#tour-pop,.controls,.tour-link,.profile-actions,.caret{display:none!important}
+    body.print-profile .coverage,body.print-profile .standfirst,body.print-profile .valbanner,
+    body.print-profile .methodology,body.print-profile .count-note{display:none!important}
+    body.print-profile .entry:not(.print-target){display:none!important}
+    body.print-profile .entry.print-target .profile{display:block!important}
+    body.print-profile .entry.print-target{border-bottom:none}
+  }
   @media (max-width:760px){
     .entry-row{grid-template-columns:30px 1fr 110px;row-gap:10px}
     .cell.hide-m,.caret{display:none}
@@ -254,7 +262,7 @@
     </div>
   </div>
   <hr class="rule thin">
-  <div style="background:var(--warm-bg);border-left:3px solid var(--warm);padding:12px 16px;margin-top:18px;font-size:.84rem;line-height:1.55;color:var(--ink-2)">
+  <div class="valbanner" style="background:var(--warm-bg);border-left:3px solid var(--warm);padding:12px 16px;margin-top:18px;font-size:.84rem;line-height:1.55;color:var(--ink-2)">
     <b style="color:var(--warm)">Validation status — read first.</b> The data is real; the ranking is not yet proven.
     Two blind backtests against firms that actually sold came back at chance, and a follow-up diagnosis indicates the free
     age <i>estimate</i> — not necessarily the age <i>thesis</i> — was the weak link (true ages separated sellers in a small
@@ -1144,7 +1152,7 @@ function render(){
             <h3 class="section">Firm record</h3>
             <ul class="facts">${facts}</ul>
             <div class="profile-actions">
-              <button class="btn primary" onclick="event.stopPropagation();downloadPDF()">Export profile</button>
+              <button class="btn primary" onclick="event.stopPropagation();exportProfile(this)">Export profile</button>
             </div>
           </div>
         </div>
@@ -1253,6 +1261,20 @@ function downloadCSV(){
 function downloadPDF(){
   document.querySelectorAll(".entry").forEach(e=>e.classList.add("open"));
   window.print();
+}
+
+function exportProfile(btn){
+  const entry = btn.closest(".entry");
+  entry.classList.add("open","print-target");
+  document.body.classList.add("print-profile");
+  const cleanup = ()=>{
+    document.body.classList.remove("print-profile");
+    entry.classList.remove("print-target");
+    removeEventListener("afterprint", cleanup);
+  };
+  addEventListener("afterprint", cleanup);
+  window.print();
+  setTimeout(cleanup, 2000);
 }
 </script>
 </body>
