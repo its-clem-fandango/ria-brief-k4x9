@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strata Signal Viability Map</title>
+<style>
+  :root{
+    --ink:#1a1d1a; --muted:#6b716b; --line:#e3e1da; --bg:#faf9f6; --panel:#fff;
+    --green:#1f7a4d; --greenbg:#e7f3ec; --amber:#9a6a16; --amberbg:#fbf2dd; --red:#9e3b2e; --redbg:#f7e6e2;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;line-height:1.5;}
+  .wrap{max-width:1080px;margin:0 auto;padding:48px 40px 80px;}
+  .kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;}
+  h1{font-family:Georgia,"Times New Roman",serif;font-size:34px;margin:.2em 0 .1em;font-weight:600;}
+  h2{font-family:Georgia,serif;font-size:21px;margin:38px 0 6px;border-bottom:2px solid var(--ink);padding-bottom:6px;}
+  h3{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:24px 0 8px;}
+  p{margin:.5em 0;font-size:15px;}
+  .sub{color:var(--muted);font-size:14px;}
+  .lead{font-size:16px;max-width:760px;}
+  .legend{display:flex;gap:20px;flex-wrap:wrap;margin:16px 0 4px;font-size:13px;}
+  .legend span{display:inline-flex;align-items:center;gap:6px;}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block;}
+  .g{background:var(--green)} .a{background:var(--amber)} .r{background:var(--red)}
+  .cards{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0 6px;}
+  .card{flex:1;min-width:150px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;}
+  .card .n{font-family:Georgia,serif;font-size:30px;font-weight:600;}
+  .card.gc .n{color:var(--green)} .card.ac .n{color:var(--amber)} .card.rc .n{color:var(--red)}
+  .card .l{font-size:12.5px;color:var(--muted);}
+  table{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:13.5px;background:var(--panel);}
+  th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--line);padding:8px 10px;font-weight:600;}
+  td{border-bottom:1px solid var(--line);padding:9px 10px;vertical-align:top;}
+  td.sig{font-weight:600;width:30%;}
+  td.src{color:var(--muted);font-size:12.5px;width:24%;}
+  .pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11.5px;font-weight:600;white-space:nowrap;}
+  .pg{background:var(--greenbg);color:var(--green);} .pa{background:var(--amberbg);color:var(--amber);} .pr{background:var(--redbg);color:var(--red);}
+  .catbar{background:#1a1d1a;color:#fff;padding:7px 12px;border-radius:6px 6px 0 0;font-size:13px;font-weight:600;margin-top:26px;display:flex;justify-content:space-between;}
+  .catbar .w{font-weight:400;color:#c9ccc7;}
+  .callout{background:#fff;border-left:4px solid var(--red);border-radius:0 8px 8px 0;padding:16px 20px;margin:22px 0;box-shadow:0 1px 0 var(--line);}
+  .callout.g{border-left-color:var(--green);}
+  .callout h4{margin:0 0 6px;font-size:15px;}
+  .mock{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:14px 0;max-width:560px;font-size:13.5px;}
+  .mock .row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed var(--line);}
+  .mock .rc{display:inline-flex;align-items:center;gap:7px;padding:4px 0;}
+  .tag{font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:4px;letter-spacing:.03em;}
+  .tag.live{background:var(--greenbg);color:var(--green);} .tag.lic{background:var(--amberbg);color:var(--amber);} .tag.scr{background:var(--redbg);color:var(--red);}
+  .foot{margin-top:40px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;}
+  code{background:#f0efe9;padding:1px 5px;border-radius:4px;font-size:12.5px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="kicker">Strata Intelligence · Feasibility Companion to the Demo</div>
+  <h1>Signal Viability Map</h1>
+  <p class="lead">Every signal in the Strata scoring model, judged on the only three questions that decide whether it can be a product: <b>can we get it</b>, <b>can we legally ship it (and at what cost)</b>, and <b>does it actually predict a sale</b>. The demo shows what the output looks like; this shows what's real behind it.</p>
+
+  <div class="legend">
+    <span><span class="dot g"></span> Green — clear / proven / free</span>
+    <span><span class="dot a"></span> Amber — licensable, gray-area, or unproven</span>
+    <span><span class="dot r"></span> Red — restricted, contested, or untested-and-relied-on</span>
+  </div>
+
+  <div class="cards">
+    <div class="card gc"><div class="n">~12</div><div class="l">signals free &amp; legally clean to ship (public gov records)</div></div>
+    <div class="card ac"><div class="n">~25</div><div class="l">depend on scraping, vendor licensing, or restricted data</div></div>
+    <div class="card rc"><div class="n">3 / 40+</div><div class="l">signals actually tested for prediction — all came back weak or flat</div></div>
+  </div>
+
+  <div class="callout">
+    <h4>The one thing to take from this page</h4>
+    <p>The signals that are <b>cheap and legally clean</b> (owner age proxy, succession gap, trajectory, UCC, filings) are the ones we've tested — and they did <b>not</b> predict sales in two blind backtests. The signals the plan rates <b>highest predictive value</b> (prior sale, prior listing, competitor acquired, key-man departure) are <b>untested</b> and depend on the <b>legally contested</b> sources (LinkedIn/BizBuySell/Glassdoor scraping, FINRA). So the proven-cheap column is weak, and the promising column is unverified on both law and prediction. That gap is the product's central open question.</p>
+  </div>
+
+  <div class="callout g">
+    <h4>Update — Jul 1, 2026: Part A behavioral obtainability closed (PASS)</h4>
+    <p>Two 25-firm obtainability runs closed the last Phase 0 Part A exit criterion (SEC run: 15 labeled + 10 AZ firms; web run: a different 25-firm labeled sample, 12 sellers / 13 controls — the pre-sale and relocation figures below are from the web sample). Four Category-C signal types are obtainable <b>without heroics from SEC/IAPD alone</b>, provenance-clean: headcount/AUM decline (Item 5), advisor-departure counts (Item 5.B/IAPD diffs — the SEC substitute for U5), office closures (Schedule D), and ownership/succession events (Schedule A/B). The open web added little that is both allowed and forward-looking: exit/deal language is post-hoc (pre-sale-visible 1/12), SOS events work only where an open-data API exists (CO yes, NV walled), home/relocation is not obtainable from allowed sources (0/25), and Wayback decay is still untested (sandbox-blocked — re-run pending). <b>Obtainable ≠ predictive:</b> none of these lanes has been prediction-tested. Details: <code>SEC_OBTAINABILITY.md</code>, <code>WEB_OBTAINABILITY.md</code>, closure memo.</p>
+    <p><b>Owner-age addendum (same day):</b> a 15-principal true-age diagnosis suggests real ages DO separate sellers from non-sellers (AUC 0.68, small sample) while the free ADV-derived estimate does not — the free proxy, not the thesis, appears to be the weak link. <b>Confirming this requires licensed date-of-birth data (~$0.02/record plus vendor minimums).</b> The POC is built on free public data only, so this stops here by design: the licensed re-test is the first item on a production budget, not part of the demo. (Diagnosis also leaned on voter-roll birth years, which are use-restricted in many states — counsel item.)</p>
+  </div>
+
+  <p class="sub"><b>Reading the "Predictive" column:</b> "Tested ✓" means it ran through the Part B blind backtests. "Untested" means no validation exists yet — note this is different from the plan's <i>Confidence Grade</i>, which measures evidence <i>certainty</i>, not whether the signal predicts a sale. A signal can be Confidence-A (verified to source) and still Untested for prediction.</p>
+
+  <!-- CATEGORY A -->
+  <div class="catbar"><span>Category A — Business Mandate Fit</span><span class="w">20% of score · a filter, not an exit predictor</span></div>
+  <table>
+    <tr><th>Signal</th><th>Primary source</th><th>Obtainable</th><th>Legal to ship / cost</th><th>Predictive</th></tr>
+    <tr><td class="sig">Sector / NAICS match</td><td class="src">SEC, Census, state registry</td><td><span class="pill pg">Yes</span></td><td><span class="pill pg">Free</span></td><td>Filter (n/a)</td></tr>
+    <tr><td class="sig">Revenue in target band (proxy)</td><td class="src">SBA loans, LinkedIn, Yelp</td><td><span class="pill pa">Proxy only</span></td><td><span class="pill pa">SBA free · Yelp/LI gray</span></td><td>Untested</td></tr>
+    <tr><td class="sig">Established 10+ years</td><td class="src">State registry, WHOIS</td><td><span class="pill pg">Yes</span></td><td><span class="pill pg">Free</span></td><td><span class="pill pr">Tested ✓ — confounded</span></td></tr>
+    <tr><td class="sig">Single/family-owned, not PE-backed</td><td class="src">PitchBook (excl.), registry</td><td><span class="pill pa">Partial</span></td><td><span class="pill pa">PitchBook $$</span></td><td>Filter (n/a)</td></tr>
+    <tr><td class="sig">No senior-leadership hiring</td><td class="src">Indeed, LinkedIn Jobs</td><td><span class="pill pa">Partial</span></td><td><span class="pill pa">Scraping gray</span></td><td>Untested</td></tr>
+    <tr><td class="sig">No growth-lender UCC filing</td><td class="src">State UCC</td><td><span class="pill pg">Yes</span></td><td><span class="pill pg">Free</span></td><td>Untested</td></tr>
+  </table>
+
+  <!-- CATEGORY B -->
+  <div class="catbar"><span>Category B — Owner Lifecycle Profile</span><span class="w">20% of score · the part Part B actually tested</span></div>
+  <table>
+    <tr><th>Signal</th><th>Primary source</th><th>Obtainable</th><th>Legal to ship / cost</th><th>Predictive</th></tr>
+    <tr><td class="sig">Owner age band (50–54 / 55–64 / 65+)</td><td class="src">License date, voter DOB, PDL</td><td><span class="pill pa">Hard / noisy</span></td><td><span class="pill pa">Voter restricted · append ~$0.02</span></td><td><span class="pill pa">Diagnosis Jul '26: TRUE age separates (AUC 0.68, n=15, n.s.) — our free estimate inverted (0.16; second-career misses). Estimation, not thesis, is the weak link. <b>Confirming requires licensed DOB data (paid) — outside POC scope; a production budget line.</b></span></td></tr>
+    <tr><td class="sig">Sole owner / no blocking partner</td><td class="src">State registry officer list</td><td><span class="pill pg">Yes</span></td><td><span class="pill pg">Free</span></td><td>Untested</td></tr>
+    <tr><td class="sig">No family successor (succession gap)</td><td class="src">LinkedIn surname, registry</td><td><span class="pill pa">Partial</span></td><td><span class="pill pa">LinkedIn gray</span></td><td><span class="pill pr">Tested ✓ — FLAT</span></td></tr>
+    <tr><td class="sig">Owner also owns the real estate</td><td class="src">County tax assessor</td><td><span class="pill pg">Yes</span></td><td><span class="pill pg">Free</span></td><td>Untested</td></tr>
+  </table>
+
+  <!-- CATEGORY C -->
+  <div class="catbar"><span>Category C — Behavioural &amp; Event Signals</span><span class="w">60% of score · the bet · SEC-obtainable (Jul '26) · prediction untested</span></div>
+
+  <h3>C1 — Prior Transaction (plan's "highest predictive value")</h3>
+  <table>
+    <tr><th>Signal</th><th>Primary source</th><th>Obtainable</th><th>Legal to ship / cost</th><th>Predictive</th></tr>
+    <tr><td class="sig">Owner previously sold a business</td><td class="src">LinkedIn, news, BizBuySell, OpenCorporates</td><td><span class="pill pa">Partial</span></td><td><span class="pill pr">Scraping contested</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Business previously listed for sale</td><td class="src">BizBuySell, BizQuest, LoopNet</td><td><span class="pill pa">Partial</span></td><td><span class="pill pr">LoopNet=CoStar · scraping</span></td><td><span class="pill pr">Untested ("strongest predictor")</span></td></tr>
+    <tr><td class="sig">Owner previously acquired a business</td><td class="src">LinkedIn, news, SBA</td><td><span class="pill pa">Partial</span></td><td><span class="pill pa">Gray / SBA free</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Multi-firm principal (financial sector)</td><td class="src">FINRA BrokerCheck</td><td><span class="pill pa">Partial</span></td><td><span class="pill pr">FINRA license req.</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Owner worked at a PE-backed company</td><td class="src">LinkedIn employer history</td><td><span class="pill pa">Partial</span></td><td><span class="pill pa">LinkedIn gray</span></td><td><span class="pill pr">Untested</span></td></tr>
+  </table>
+
+  <h3>C2 — Retirement &amp; Exit Lifecycle</h3>
+  <table>
+    <tr><th>Signal</th><th>Primary source</th><th>Obtainable</th><th>Legal to ship / cost</th><th>Predictive</th></tr>
+    <tr><td class="sig">LinkedIn post activity declining</td><td class="src">LinkedIn profile</td><td><span class="pill pa">Partial</span></td><td><span class="pill pr">Scraping contested</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Title → "Advisor / Consultant / Emeritus"</td><td class="src">LinkedIn</td><td><span class="pill pa">Partial</span></td><td><span class="pill pr">Scraping contested</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Retirement / "next chapter" language</td><td class="src">Google News, LinkedIn (Serper)</td><td><span class="pill pa">Post-hoc only (pre-sale 1/12)</span></td><td><span class="pill pa">Serper API $</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Joined unrelated board</td><td class="src">LinkedIn, IRS EO</td><td><span class="pill pa">Partial</span></td><td><span class="pill pa">Mixed</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Business tenure 20+ yrs</td><td class="src">State registry</td><td><span class="pill pg">Yes</span></td><td><span class="pill pg">Free</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Anniversary effect (milestone yr + age)</td><td class="src">Registry + age estimate</td><td><span class="pill pa">Partial</span></td><td><span class="pill pa">Needs age</span></td><td><span class="pill pr">Untested</span></td></tr>
+  </table>
+
+  <h3>C3 — Estate Planning &amp; Wealth Transition</h3>
+  <table>
+    <tr><th>Signal</th><th>Primary source</th><th>Obtainable</th><th>Legal to ship / cost</th><th>Predictive</th></tr>
+    <tr><td class="sig">Charitable trust / family foundation</td><td class="src">IRS EO (Form 990)</td><td><span class="pill pg">Yes</span></td><td><span class="pill pg">Free</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Family LLC / living trust created</td><td class="src">State LLC registry</td><td><span class="pill pa">State-dependent (CO API ✓ · NV walled)</span></td><td><span class="pill pg">Free where open-data</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Probate filing linked to business</td><td class="src">County probate records</td><td><span class="pill pg">Yes</span></td><td><span class="pill pg">Free (access varies)</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Primary residence listed / retirement-dest. buy</td><td class="src">Zillow/Redfin, county deeds</td><td><span class="pill pr">No — allowed sources (0/25)</span></td><td><span class="pill pa">Deeds free · Zillow gray</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Home renovation permit (pre-sale)</td><td class="src">County permit portals</td><td><span class="pill pa">Partial</span></td><td><span class="pill pg">Public</span></td><td><span class="pill pr">Untested</span></td></tr>
+  </table>
+
+  <h3>C4 — Ghost Owner &amp; Digital Decay</h3>
+  <table>
+    <tr><th>Signal</th><th>Primary source</th><th>Obtainable</th><th>Legal to ship / cost</th><th>Predictive</th></tr>
+    <tr><td class="sig">Ghost owner (absent from team page)</td><td class="src">Company website scrape</td><td><span class="pill pa">Partial</span></td><td><span class="pill pa">Own-target site · lower risk</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Digital decay (social posting stopped)</td><td class="src">Facebook, LinkedIn company page, Wayback</td><td><span class="pill pa">Untested (Wayback re-run pending)</span></td><td><span class="pill pa">Scraping gray</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Tech-debt fatigue (old stack)</td><td class="src">BuiltWith</td><td><span class="pill pg">Yes</span></td><td><span class="pill pg">Free tier</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Stopped running Facebook ads</td><td class="src">Facebook Ads Library</td><td><span class="pill pg">Yes</span></td><td><span class="pill pg">Official API</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Short (1-yr) domain renewal</td><td class="src">WHOIS</td><td><span class="pill pa">Partial</span></td><td><span class="pill pa">GDPR redaction</span></td><td><span class="pill pr">Untested</span></td></tr>
+  </table>
+
+  <h3>C5 — Financial Stress &amp; Stagnation</h3>
+  <table>
+    <tr><th>Signal</th><th>Primary source</th><th>Obtainable</th><th>Legal to ship / cost</th><th>Predictive</th></tr>
+    <tr><td class="sig">MCA lender blanket lien</td><td class="src">State UCC + lender taxonomy</td><td><span class="pill pg">Yes</span></td><td><span class="pill pg">Free</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Glassdoor sentiment drop</td><td class="src">Glassdoor scrape + NLP</td><td><span class="pill pa">Partial</span></td><td><span class="pill pr">Glassdoor ToS</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Revenue stable/declining 2+ yrs (proxy)</td><td class="src">RIAs: ADV Item 5 AUM/headcount; else Yelp/Wayback</td><td><span class="pill pg">RIAs: Yes (SEC)</span></td><td><span class="pill pg">Free (RIA scope)</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Key-man departure (#2 left to competitor)</td><td class="src">ADV Item 5.B / IAPD diffs (counts); LinkedIn</td><td><span class="pill pg">Counts: Yes (SEC)</span></td><td><span class="pill pa">Counts free · names need U5 or fwd IAPD archive</span></td><td><span class="pill pr">Untested</span></td></tr>
+  </table>
+
+  <h3>C6 — Sector M&amp;A Pressure</h3>
+  <table>
+    <tr><th>Signal</th><th>Primary source</th><th>Obtainable</th><th>Legal to ship / cost</th><th>Predictive</th></tr>
+    <tr><td class="sig">3+ PE roll-up platforms in sector/geo</td><td class="src">PitchBook, trade press</td><td><span class="pill pa">Partial</span></td><td><span class="pill pa">PitchBook $$</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Direct competitor acquired (FOMO)</td><td class="src">Google News (Serper)</td><td><span class="pill pa">Partial</span></td><td><span class="pill pa">Serper API $</span></td><td><span class="pill pr">Untested ("highest sector signal")</span></td></tr>
+    <tr><td class="sig">Owner received inbound inquiry (public)</td><td class="src">LinkedIn, business journals</td><td><span class="pill pa">Rare/partial</span></td><td><span class="pill pa">Gray</span></td><td><span class="pill pr">Untested</span></td></tr>
+    <tr><td class="sig">Obituary: partner/parent passed</td><td class="src">Legacy.com scrape</td><td><span class="pill pa">Partial</span></td><td><span class="pill pa">Scraping gray</span></td><td><span class="pill pr">Untested</span></td></tr>
+  </table>
+
+  <p class="sub"><b>Negative modifiers (C7)</b> — LinkedIn activity, new location, awards, active hiring, rebrand, growth UCC — are displayed, not scored, and lean on the same scraping/LinkedIn sources. Same legal profile as C2/C4; not predictors.</p>
+
+  <!-- IN-UI MOCK -->
+  <h2>Option: thread a light version into the demo UI</h2>
+  <p>Rather than a separate document, the same information can ride inside the demo using the mechanism the plan already has — the <b>Confidence Grade</b> and <b>evidence links</b>. Add one dimension: a <b>provenance tag</b> per reason code showing whether the signal is live-now, license-gated, or scraping-dependent. The demo stays honest without a second report.</p>
+
+  <div class="mock">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:8px;">
+      <b style="font-family:Georgia,serif;font-size:17px;">Hartwell Wealth Advisors</b>
+      <span><b style="color:var(--green);font-size:18px;">91</b> &nbsp;<span class="pill pg">READY</span></span>
+    </div>
+    <div style="font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;">Reason codes &nbsp;·&nbsp; <span class="tag live">LIVE</span> ship-ready &nbsp; <span class="tag lic">LICENSE</span> needs license &nbsp; <span class="tag scr">SCRAPE</span> contested source</div>
+    <div class="rc"><span class="tag live">LIVE</span> succession_gap_visible <span class="sub">— SEC ADV, free</span></div><br>
+    <div class="rc"><span class="tag live">LIVE</span> late_career_owner <span class="sub">— license date, free <i>(but weak predictor)</i></span></div><br>
+    <div class="rc"><span class="tag scr">SCRAPE</span> digital_decay_detected <span class="sub">— website/social scrape</span></div><br>
+    <div class="rc"><span class="tag scr">SCRAPE</span> key_man_departure <span class="sub">— LinkedIn / U5</span></div><br>
+    <div class="rc"><span class="tag lic">LICENSE</span> firm_history_ma <span class="sub">— FINRA BrokerCheck</span></div>
+  </div>
+  <p class="sub">At a glance the client sees the lead <i>and</i> that two of its strongest reason codes rest on contested sources and one on a license — so "here's the product, here's what it takes to ship it" is built into the view itself.</p>
+
+  <div class="callout g">
+    <h4>How to use this with the client</h4>
+    <p>Lead with the demo (the capability is real and impressive). Hand this map alongside it as the honest "path to production": the green rows are shippable today, the amber/red rows are a licensing-and-legal budget line, and the predictive column is the candid statement that the model's bets still need a proper behavioral backtest. That framing sells judgment, not just a screenshot.</p>
+  </div>
+
+  <div class="foot">
+    <p>Sources for judgments: signal list &amp; costs from <i>Strata Intelligence Business Plan v4</i>; legal/sourcing posture from <i>Lesson 6</i> (SEC green / FINRA &amp; CRE red); predictive column from the Part B blind backtests and owner-age diagnostic (<code>REVEAL.md</code>, <code>REVEAL2.md</code>, <code>AGE_DIAGNOSTIC.md</code>); obtainability column updated Jul 1 2026 from the Part A behavioral-obtainability run (<code>SEC_OBTAINABILITY.md</code>, <code>WEB_OBTAINABILITY.md</code>; age spot-checks in <code>true_ages.csv</code>: n=3 explicit, median |Δ| 5 yrs, second-career principals miss by decades). "Predictive: Untested" = no validation exists yet, distinct from the plan's evidence-certainty Confidence Grade. <b>Not legal advice</b> — the red/amber legal calls flag exposure for counsel to resolve, not settled conclusions.</p>
+  </div>
+
+</div>
+</body>
+</html>

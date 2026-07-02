@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strata Intelligence — RIA Sell-Readiness Brief</title>
+<style>
+  :root{
+    --paper:#faf9f6; --paper-2:#f3f1ea; --ink:#1c1b18; --ink-2:#55524a; --ink-3:#8d897e;
+    --hairline:#e3e0d6; --hairline-dark:#c9c5b8;
+    --brand:#17503b; --brand-soft:#e9f1ec;
+    --ready:#17503b; --ready-bg:#e9f1ec;
+    --warm:#9a6210; --warm-bg:#f7efdf;
+    --early:#8d897e; --early-bg:#efede6;
+    --serif:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;-webkit-font-smoothing:antialiased}
+  button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
+  .num{font-variant-numeric:tabular-nums}
+
+  .sheet{max-width:880px;margin:0 auto;padding:0 32px 80px}
+
+  /* ---------- masthead ---------- */
+  .masthead{padding:44px 0 0}
+  .wordmark{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .wordmark .brand{font-family:var(--serif);font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+  .wordmark .brand i{font-style:normal;color:var(--brand)}
+  .confidential{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+  .rule{border:none;border-top:2px solid var(--ink);margin:14px 0 0}
+  .rule.thin{border-top:1px solid var(--hairline);margin:0}
+
+  .brief-title{padding:34px 0 26px}
+  .brief-title h1{font-family:var(--serif);font-weight:600;font-size:2.3rem;line-height:1.15;letter-spacing:-.01em;max-width:620px}
+  .brief-title .dateline{margin-top:14px;font-size:.85rem;color:var(--ink-2);display:flex;gap:18px;flex-wrap:wrap}
+  .brief-title .dateline b{color:var(--ink);font-weight:600}
+
+  .standfirst{font-family:var(--serif);font-size:1.08rem;line-height:1.65;color:var(--ink-2);max-width:660px;padding:24px 0 8px}
+  .standfirst b{color:var(--ink);font-weight:600}
+
+  /* ---------- coverage strip ---------- */
+  .coverage{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--hairline);margin:26px 0 8px}
+  .coverage div{padding:16px 18px 18px;border-right:1px solid var(--hairline)}
+  .coverage div:first-child{padding-left:0}
+  .coverage div:last-child{border-right:none}
+  .coverage .k{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+  .coverage .v{font-family:var(--serif);font-size:1.75rem;margin-top:6px;font-weight:600}
+  .coverage .v small{font-size:.85rem;color:var(--ink-3);font-family:var(--sans);font-weight:400}
+
+  /* ---------- controls ---------- */
+  .controls{display:flex;align-items:center;gap:8px;padding:22px 0 14px;flex-wrap:wrap}
+  .controls .label{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-right:8px}
+  .chip{border:1px solid var(--hairline-dark);border-radius:2px;padding:6px 13px;font-size:.8rem;color:var(--ink-2);background:transparent}
+  .chip:hover{border-color:var(--ink-2)}
+  .chip.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  .export{margin-left:auto;display:flex;gap:8px}
+  .btn{border:1px solid var(--ink);border-radius:2px;padding:8px 16px;font-size:.8rem;font-weight:600;letter-spacing:.04em}
+  .btn:hover{background:var(--ink);color:var(--paper)}
+  .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+  .btn.primary:hover{background:#0f3d2c}
+
+  /* ---------- target entries ---------- */
+  .entry{border-bottom:1px solid var(--hairline)}
+  .entry-row{display:grid;grid-template-columns:44px 1fr 120px 90px 150px 28px;gap:14px;align-items:center;padding:20px 0;cursor:pointer}
+  .entry-row:hover .firm-name{color:var(--brand)}
+  .rank{font-family:var(--serif);font-size:1.25rem;color:var(--ink-3);font-weight:600}
+  .firm-name{font-family:var(--serif);font-size:1.22rem;font-weight:600;letter-spacing:-.01em;transition:color .12s}
+  .firm-meta{font-size:.8rem;color:var(--ink-3);margin-top:3px}
+  .firm-meta b{color:var(--ink-2);font-weight:500}
+  .cell-k{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:3px}
+  .cell-v{font-size:.95rem;font-weight:600}
+  .scoreblock{display:flex;align-items:center;gap:12px}
+  .score-big{font-family:var(--serif);font-size:1.9rem;font-weight:600;width:52px;text-align:right}
+  .band{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:4px 9px;border-radius:2px}
+  .band.ready{background:var(--ready-bg);color:var(--ready)}
+  .band.warm{background:var(--warm-bg);color:var(--warm)}
+  .band.early{background:var(--early-bg);color:var(--early)}
+  .caret{color:var(--ink-3);font-size:.8rem;transition:transform .15s;text-align:center}
+  .entry.open .caret{transform:rotate(90deg)}
+
+  /* ---------- expanded profile ---------- */
+  .profile{display:none;padding:4px 0 34px 58px}
+  .entry.open .profile{display:block;animation:fade .18s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+  .assessment{font-family:var(--serif);font-size:1.02rem;line-height:1.65;max-width:640px;border-left:3px solid var(--brand);padding:2px 0 2px 18px;margin-bottom:26px}
+  .assessment .lede{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);font-family:var(--sans);font-weight:700;display:block;margin-bottom:7px}
+
+  .profile-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:40px}
+  h3.section{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:700;border-bottom:1px solid var(--hairline);padding-bottom:8px;margin-bottom:14px}
+
+  .factor{margin-bottom:13px}
+  .factor .f-row{display:flex;justify-content:space-between;font-size:.84rem;margin-bottom:5px}
+  .factor .f-row b{font-weight:600}
+  .factor .f-row span{color:var(--ink-2)}
+  .track{height:5px;background:var(--paper-2);border-radius:0;overflow:hidden}
+  .track i{display:block;height:100%}
+
+  .evidence{margin-top:30px}
+  .ev-item{display:grid;grid-template-columns:86px 1fr;gap:14px;padding:10px 0;border-bottom:1px dotted var(--hairline)}
+  .ev-item:last-child{border-bottom:none}
+  .ev-item time{font-size:.74rem;color:var(--ink-3);padding-top:2px}
+  .ev-item p{font-size:.87rem;line-height:1.5}
+  .ev-item .src{font-size:.72rem;color:var(--ink-3);margin-top:2px;font-style:italic}
+
+  .facts li{display:flex;justify-content:space-between;gap:14px;list-style:none;padding:8px 0;border-bottom:1px dotted var(--hairline);font-size:.85rem}
+  .facts li:last-child{border-bottom:none}
+  .facts .k{color:var(--ink-2)}
+  .facts .v{font-weight:600;text-align:right}
+  .profile-actions{margin-top:24px;display:flex;gap:10px}
+
+  /* ---------- methodology / footer ---------- */
+  .methodology{margin-top:54px;border-top:2px solid var(--ink);padding-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+  .methodology h3{font-family:var(--serif);font-size:1.05rem;margin-bottom:10px}
+  .methodology p{font-size:.85rem;line-height:1.65;color:var(--ink-2)}
+  footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--hairline);font-size:.74rem;color:var(--ink-3);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+  .count-note{font-size:.8rem;color:var(--ink-3);padding:14px 0 0;font-style:italic}
+
+  /* ---------- login ---------- */
+  #login{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;
+    background:
+      repeating-linear-gradient(to bottom, rgba(255,255,255,.025) 0 2px, transparent 2px 56px),
+      linear-gradient(160deg,#123c2c 0%,#0d2e22 55%,#0a241b 100%);
+    transition:opacity .45s ease, visibility .45s}
+  #login.gone{opacity:0;visibility:hidden;pointer-events:none}
+  .portal{display:grid;grid-template-columns:1.15fr 380px;gap:64px;align-items:center;max-width:920px;width:100%}
+  .cover{color:#f2efe6}
+  .cover-wm{font-family:var(--serif);font-size:.95rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+  .cover-wm i{font-style:normal;color:#8fc4a8}
+  .cover-rule{border:none;border-top:2px solid #f2efe6;margin:14px 0 38px;opacity:.9}
+  .cover-k{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:#8fc4a8;font-weight:700}
+  .cover-title{font-family:var(--serif);font-weight:600;font-size:3.3rem;line-height:1.04;letter-spacing:-.015em;margin:14px 0 18px}
+  .cover-sub{font-family:var(--serif);font-size:1.02rem;line-height:1.6;color:rgba(242,239,230,.75);max-width:380px}
+  .cover-meta{display:flex;gap:34px;margin-top:40px;padding-top:20px;border-top:1px solid rgba(242,239,230,.25);flex-wrap:wrap}
+  .cover-meta .k{display:block;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(242,239,230,.55);margin-bottom:5px}
+  .cover-meta b{font-family:var(--serif);font-size:1.25rem;font-weight:600}
+  .login-card{width:380px;max-width:100%;background:var(--paper);padding:36px 36px 30px;box-shadow:0 24px 70px rgba(0,0,0,.45)}
+  .login-card h2{font-family:var(--serif);font-size:1.45rem;font-weight:600;letter-spacing:-.01em}
+  .login-card .tagline{font-size:.84rem;color:var(--ink-2);margin:6px 0 24px;line-height:1.5}
+  @media (max-width:860px){
+    .portal{grid-template-columns:1fr;gap:36px;max-width:420px}
+    .cover-title{font-size:2.3rem}
+    .cover-rule{margin-bottom:26px}
+    .cover-meta{gap:24px;margin-top:26px}
+  }
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px;font-weight:700}
+  .field input{width:100%;border:1px solid var(--hairline-dark);background:#fff;border-radius:2px;padding:10px 12px;font:inherit;font-size:.92rem;color:var(--ink)}
+  .field input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
+  .login-btn{width:100%;margin-top:8px;background:var(--brand);color:#fff;border:none;border-radius:2px;padding:12px;font-size:.9rem;font-weight:600;letter-spacing:.04em}
+  .login-btn:hover{background:#0f3d2c}
+  .login-note{margin-top:18px;text-align:center;font-size:.74rem;color:var(--ink-3);font-style:italic}
+  .login-card h2{margin-bottom:2px}
+
+  /* ---------- walkthrough ---------- */
+  .tour-link{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);font-weight:700;border-bottom:1px solid var(--brand);padding-bottom:1px}
+  .tour-link:hover{color:#0f3d2c}
+  #spot{position:fixed;z-index:300;border-radius:4px;pointer-events:none;display:none;
+    box-shadow:0 0 0 9999px rgba(18,17,12,.6), 0 0 0 2px var(--paper);transition:all .3s ease}
+  #tour-pop{position:fixed;z-index:301;width:330px;max-width:calc(100vw - 32px);background:var(--paper);display:none;
+    box-shadow:0 18px 50px rgba(0,0,0,.35);border-top:3px solid var(--brand);padding:20px 22px 16px}
+  #tour-pop .step-k{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);font-weight:700}
+  #tour-pop h4{font-family:var(--serif);font-size:1.15rem;font-weight:600;margin:7px 0 8px;letter-spacing:-.01em}
+  #tour-pop p{font-size:.86rem;line-height:1.55;color:var(--ink-2)}
+  .tour-nav{display:flex;align-items:center;gap:10px;margin-top:16px}
+  .tour-nav .skip{font-size:.78rem;color:var(--ink-3)}
+  .tour-nav .skip:hover{color:var(--ink)}
+  .tour-nav .spacer{flex:1}
+  .tour-btn{border:1px solid var(--ink);border-radius:2px;padding:7px 14px;font-size:.78rem;font-weight:600}
+  .tour-btn:hover{background:var(--ink);color:var(--paper)}
+  .tour-btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+  .tour-btn.primary:hover{background:#0f3d2c}
+
+  @media (max-width:760px){
+    .entry-row{grid-template-columns:30px 1fr 110px;row-gap:10px}
+    .cell.hide-m,.caret{display:none}
+    .coverage{grid-template-columns:repeat(2,1fr)}
+    .coverage div{padding-left:0;border-right:none}
+    .profile{padding-left:0}
+    .profile-grid,.methodology{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= LOGIN / PORTAL COVER ================= -->
+<div id="login">
+  <div class="portal">
+    <div class="cover">
+      <div class="cover-wm">Strata <i>Intelligence</i></div>
+      <hr class="cover-rule">
+      <span class="cover-k">Vertical portal</span>
+      <h1 class="cover-title">Registered<br>Investment<br>Advisors</h1>
+      <p class="cover-sub">Owner sell-readiness intelligence. Real Arizona pilot data — honestly labeled.</p>
+      <div class="cover-meta">
+        <div><span class="k">Cycle</span><b>July 1, 2026</b></div>
+        <div><span class="k">Firms scored</span><b>111</b></div>
+        <div><span class="k">Ready</span><b>31</b></div>
+        <div><span class="k">Coverage</span><b>Arizona (pilot)</b></div>
+      </div>
+    </div>
+    <form class="login-card" onsubmit="enterBrief(event)">
+      <h2>Sign in</h2>
+      <p class="tagline">Your subscription gives you full access to this cycle's RIA brief.</p>
+      <div class="field">
+        <label for="li-email">Email</label>
+        <input id="li-email" type="email" value="partner@rollupcapital.com" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="li-pass">Password</label>
+        <input id="li-pass" type="password" value="••••••••••">
+      </div>
+      <button class="login-btn" type="submit">Open the brief →</button>
+      <p class="login-note">Demo environment — any credentials work.</p>
+    </form>
+  </div>
+</div>
+
+<!-- ================= WALKTHROUGH ================= -->
+<div id="spot"></div>
+<div id="tour-pop">
+  <span class="step-k" id="tour-step-k"></span>
+  <h4 id="tour-title"></h4>
+  <p id="tour-text"></p>
+  <div class="tour-nav">
+    <button class="skip" onclick="endTour()">Skip tour</button>
+    <span class="spacer"></span>
+    <button class="tour-btn" id="tour-back" onclick="tourStep(tourIdx-1)">Back</button>
+    <button class="tour-btn primary" id="tour-next" onclick="tourStep(tourIdx+1)">Next</button>
+  </div>
+</div>
+
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="wordmark">
+      <span class="brand">Strata <i>Intelligence</i></span>
+      <span style="display:flex;gap:18px;align-items:baseline">
+        <button class="tour-link" onclick="startTour()">Walkthrough</button>
+        <span class="confidential">Prepared for client review · Demo</span>
+      </span>
+    </div>
+    <hr class="rule">
+  </div>
+
+  <div class="brief-title">
+    <h1>RIA Sell-Readiness Brief</h1>
+    <div class="dateline">
+      <span>Cycle: <b>July 1, 2026</b></span>
+      <span>Coverage: <b>Arizona SEC-registered RIAs, $100M–$600M AUM</b></span>
+      <span>Data: <b>real · SEC Form ADV / IAPD</b></span>
+    </div>
+  </div>
+  <hr class="rule thin">
+  <div style="background:var(--warm-bg);border-left:3px solid var(--warm);padding:12px 16px;margin-top:18px;font-size:.84rem;line-height:1.55;color:var(--ink-2)">
+    <b style="color:var(--warm)">Validation status — read first.</b> The data is real; the ranking is not yet proven.
+    Two blind backtests against firms that actually sold came back at chance, and a follow-up diagnosis indicates the free
+    age <i>estimate</i> — not necessarily the age <i>thesis</i> — was the weak link (true ages separated sellers in a small
+    verified sample). Confirming that requires licensed date-of-birth data, a known production cost outside this
+    free-data pilot. Full ledger: <a href="viability-map.html" style="color:var(--warm);font-weight:600">Signal Viability Map</a>.
+  </div>
+
+  <p class="standfirst">
+    Every firm below is <b>real</b>: 123 Arizona RIAs in the $100M–$600M window, drawn from SEC Form ADV
+    bulk filings, with principals identified and ages estimated from their public regulatory records
+    (73 of 111 scored firms have corroborated estimates). Entries are ranked by an
+    <b>illustrative composite</b> of owner age, ownership concentration and tenure — a score that is
+    <b>not yet validated</b> against realized sales. Expand any firm for its documented evidence.
+  </p>
+
+  <div class="coverage">
+    <div><span class="k">Real firms (AZ window)</span><div class="v num">123</div></div>
+    <div><span class="k">Scored</span><div class="v num">111 <small>· 90%</small></div></div>
+    <div><span class="k">Median score</span><div class="v num">62</div></div>
+    <div><span class="k">Age corroborated</span><div class="v num">73 <small>· 65%</small></div></div>
+  </div>
+
+  <div class="controls">
+    <span class="label">Show</span>
+    <button class="chip on" data-band="all" onclick="setBand(this)">All</button>
+    <button class="chip" data-band="ready" onclick="setBand(this)">Ready 80+</button>
+    <button class="chip" data-band="warm" onclick="setBand(this)">Warming 60–79</button>
+    <button class="chip" data-band="early" onclick="setBand(this)">Early &lt;60</button>
+    <div class="export">
+      <button class="btn" onclick="downloadCSV()">Export CSV</button>
+      <button class="btn primary" onclick="downloadPDF()">Print / save PDF</button>
+    </div>
+  </div>
+
+  <div id="list"></div>
+  <p class="count-note" id="count-note"></p>
+
+  <div class="methodology">
+    <div>
+      <h3>How this score is built — and what it is not</h3>
+      <p>The illustrative composite weighs three inputs actually held for every scored firm: estimated owner age (50%),
+      ownership concentration (25%), and principal tenure (25%) — all derived from SEC Form ADV and IAPD public records.
+      Longitudinal behavioral extraction (headcount/AUM trend, office closures, ownership events) has run for a pilot
+      subset and appears as dated evidence where available. Weights are judgment, not fitted parameters: the composite
+      has <b>not</b> demonstrated predictive power in blind backtests to date.</p>
+    </div>
+    <div>
+      <h3>Sources &amp; limits</h3>
+      <p>SEC Form ADV bulk filings and IAPD only — no FINRA BrokerCheck/U5, no scraped LinkedIn or paid databases.
+      Ages are estimates from regulatory career records: “corroborated” means two independent anchors agree;
+      “floor-only” means a minimum age is defensible but the band is not (typical of second-career principals).
+      12 of 123 firms lack sufficient public data and are flagged for manual review in the CSV export.</p>
+    </div>
+  </div>
+
+  <footer>
+    <span>Strata Intelligence · Pilot — real public data, illustrative scoring</span>
+    <span><button class="tour-link" onclick="startTour()">Replay walkthrough</button></span>
+    <span>All data from public SEC filings. Ages are estimates. Scores are illustrative and unvalidated — not advice, not an assertion any firm intends to sell.</span>
+  </footer>
+
+</div>
+
+<script>
+const FIRMS = [
+ {
+  "rank": 1,
+  "name": "The Capital Advisory Group Advisory Services, LLC",
+  "city": "Phoenix, AZ",
+  "aum": "$539M",
+  "age": "65–71",
+  "score": 89,
+  "why": "Principal Brett Machtig (est. age 65–71) holds 75–100% of the firm with 41 years in the industry. Behavioral signal extraction has not yet run for this firm; the score rests on demographics, ownership and tenure only. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 90,
+   "Ownership concentration": 90,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Brett Allen Machtig (est. 65–71)",
+   "Age estimate": "single-source",
+   "SEC-registered": "2008",
+   "AUM (ADV)": "$539M",
+   "Accounts": "1814",
+   "Employees": "7",
+   "Ownership": "75–100%",
+   "CRD": "140551"
+  },
+  "evidence": [
+   [
+    "2026-03-16",
+    "Form ADV filing: Brett Allen Machtig listed as control person, ownership 75–100% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1985",
+    "Career anchor (exam): earliest regulatory record → est. age 65–71",
+    "SEC IAPD"
+   ]
+  ]
+ },
+ {
+  "rank": 2,
+  "name": "Harmony Asset Management LLC",
+  "city": "Scottsdale, AZ",
+  "aum": "$463M",
+  "age": "67–73",
+  "score": 89,
+  "why": "Principal Alan Rosenfield (est. age 67–73) holds 75–100% of the firm with 43 years in the industry. Behavioral signal extraction has not yet run for this firm; the score rests on demographics, ownership and tenure only. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 90,
+   "Ownership concentration": 90,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Alan Edward Rosenfield (est. 67–73)",
+   "Age estimate": "single-source",
+   "SEC-registered": "2020",
+   "AUM (ADV)": "$463M",
+   "Accounts": "602",
+   "Employees": "10",
+   "Ownership": "75–100%",
+   "CRD": "116069"
+  },
+  "evidence": [
+   [
+    "2026-03-23",
+    "Form ADV filing: Alan Edward Rosenfield listed as control person, ownership 75–100% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1983",
+    "Career anchor (exam): earliest regulatory record → est. age 67–73",
+    "SEC IAPD"
+   ]
+  ]
+ },
+ {
+  "rank": 3,
+  "name": "Greenberg Financial Group",
+  "city": "Tucson, AZ",
+  "aum": "$407M",
+  "age": "66–72",
+  "score": 89,
+  "why": "Principal Dean Greenberg (est. age 66–72) holds 75–100% of the firm with 42 years in the industry. Behavioral signal extraction has not yet run for this firm; the score rests on demographics, ownership and tenure only. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 90,
+   "Ownership concentration": 90,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Dean Steven Greenberg (est. 66–72)",
+   "Age estimate": "single-source",
+   "SEC-registered": "1990",
+   "AUM (ADV)": "$407M",
+   "Accounts": "1175",
+   "Employees": "10",
+   "Ownership": "75–100%",
+   "CRD": "38747"
+  },
+  "evidence": [
+   [
+    "2026-03-16",
+    "Form ADV filing: Dean Steven Greenberg listed as control person, ownership 75–100% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1984",
+    "Career anchor (exam): earliest regulatory record → est. age 66–72",
+    "SEC IAPD"
+   ]
+  ]
+ },
+ {
+  "rank": 4,
+  "name": "Johnson Financial Advisors",
+  "city": "Tempe, AZ",
+  "aum": "$301M",
+  "age": "≥65",
+  "score": 89,
+  "why": "Principal Philip Johnson (est. age ≥65, floor-only (late entry)) holds 75–100% of the firm with 44 years in the industry. Behavioral signal extraction has not yet run for this firm; the score rests on demographics, ownership and tenure only. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 90,
+   "Ownership concentration": 90,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Philip Otho Johnson (est. ≥65)",
+   "Age estimate": "corroborated · floor-only (late entry)",
+   "SEC-registered": "2018",
+   "AUM (ADV)": "$301M",
+   "Accounts": "756",
+   "Employees": "5",
+   "Ownership": "75–100%",
+   "CRD": "104621"
+  },
+  "evidence": [
+   [
+    "2026-03-19",
+    "Form ADV filing: Philip Otho Johnson listed as control person, ownership 75–100% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1982",
+    "Career anchor (exam): earliest regulatory record → est. age ≥65 — floor-only (late entry)",
+    "SEC IAPD"
+   ]
+  ]
+ },
+ {
+  "rank": 5,
+  "name": "Wj Wealth Management",
+  "city": "Glendale, AZ",
+  "aum": "$262M",
+  "age": "66–72",
+  "score": 89,
+  "why": "Principal Jeffry Jones (est. age 66–72) holds 75–100% of the firm with 42 years in the industry. Behavioral signal extraction has not yet run for this firm; the score rests on demographics, ownership and tenure only. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 90,
+   "Ownership concentration": 90,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Jeffry Reeves Jones (est. 66–72)",
+   "Age estimate": "single-source",
+   "SEC-registered": "2020",
+   "AUM (ADV)": "$262M",
+   "Accounts": "918",
+   "Employees": "6",
+   "Ownership": "75–100%",
+   "CRD": "170181"
+  },
+  "evidence": [
+   [
+    "2026-03-06",
+    "Form ADV filing: Jeffry Reeves Jones listed as control person, ownership 75–100% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1984",
+    "Career anchor (exam): earliest regulatory record → est. age 66–72",
+    "SEC IAPD"
+   ]
+  ]
+ },
+ {
+  "rank": 6,
+  "name": "Allied Portfolio Management, Inc.",
+  "city": "Tucson, AZ",
+  "aum": "$240M",
+  "age": "65–71",
+  "score": 89,
+  "why": "Principal Steven Graham (est. age 65–71) holds 75–100% of the firm with 41 years in the industry. Behavioral signal extraction has not yet run for this firm; the score rests on demographics, ownership and tenure only. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 90,
+   "Ownership concentration": 90,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Steven Lewis Graham (est. 65–71)",
+   "Age estimate": "corroborated",
+   "SEC-registered": "2002",
+   "AUM (ADV)": "$240M",
+   "Accounts": "327",
+   "Employees": "2",
+   "Ownership": "75–100%",
+   "CRD": "113809"
+  },
+  "evidence": [
+   [
+    "2026-04-10",
+    "Form ADV filing: Steven Lewis Graham listed as control person, ownership 75–100% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1985",
+    "Career anchor (exam): earliest regulatory record → est. age 65–71",
+    "SEC IAPD"
+   ]
+  ]
+ },
+ {
+  "rank": 7,
+  "name": "Lane Brothers Investment Counsel",
+  "city": "Prescott, AZ",
+  "aum": "$240M",
+  "age": "68–74",
+  "score": 89,
+  "why": "Principal Kevin Lane (est. age 68–74) holds 75–100% of the firm with 44 years in the industry. Behavioral signal extraction has not yet run for this firm; the score rests on demographics, ownership and tenure only. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 90,
+   "Ownership concentration": 90,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Kevin Patrick Lane (est. 68–74)",
+   "Age estimate": "corroborated",
+   "SEC-registered": "2024",
+   "AUM (ADV)": "$240M",
+   "Accounts": "979",
+   "Employees": "6",
+   "Ownership": "75–100%",
+   "CRD": "105968"
+  },
+  "evidence": [
+   [
+    "2026-03-27",
+    "Form ADV filing: Kevin Patrick Lane listed as control person, ownership 75–100% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1982",
+    "Career anchor (exam): earliest regulatory record → est. age 68–74",
+    "SEC IAPD"
+   ]
+  ]
+ },
+ {
+  "rank": 8,
+  "name": "Hillspring Financial, Inc.",
+  "city": "Surprise, AZ",
+  "aum": "$186M",
+  "age": "64–70",
+  "score": 89,
+  "why": "Principal Kent Forsey (est. age 64–70) holds 75–100% of the firm with 40 years in the industry. Behavioral signal extraction has not yet run for this firm; the score rests on demographics, ownership and tenure only. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 90,
+   "Ownership concentration": 90,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Kent Garry Forsey (est. 64–70)",
+   "Age estimate": "single-source",
+   "SEC-registered": "2024",
+   "AUM (ADV)": "$186M",
+   "Accounts": "652",
+   "Employees": "4",
+   "Ownership": "75–100%",
+   "CRD": "113938"
+  },
+  "evidence": [
+   [
+    "2026-03-13",
+    "Form ADV filing: Kent Garry Forsey listed as control person, ownership 75–100% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1986",
+    "Career anchor (exam): earliest regulatory record → est. age 64–70",
+    "SEC IAPD"
+   ]
+  ]
+ },
+ {
+  "rank": 9,
+  "name": "Wilkinson Wealth Management, LLC",
+  "city": "Tucson, AZ",
+  "aum": "$165M",
+  "age": "63–69",
+  "score": 89,
+  "why": "Principal Elbridge Wilkinson (est. age 63–69) holds 75–100% of the firm with 39 years in the industry. Behavioral signal extraction has not yet run for this firm; the score rests on demographics, ownership and tenure only. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 90,
+   "Ownership concentration": 90,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Elbridge Gerry Wilkinson (est. 63–69)",
+   "Age estimate": "corroborated",
+   "SEC-registered": "2021",
+   "AUM (ADV)": "$165M",
+   "Accounts": "890",
+   "Employees": "2",
+   "Ownership": "75–100%",
+   "CRD": "317741"
+  },
+  "evidence": [
+   [
+    "2026-03-24",
+    "Form ADV filing: Elbridge Gerry Wilkinson listed as control person, ownership 75–100% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1987",
+    "Career anchor (exam): earliest regulatory record → est. age 63–69",
+    "SEC IAPD"
+   ]
+  ]
+ },
+ {
+  "rank": 10,
+  "name": "Profocus Incorporated",
+  "city": "Phoenix, AZ",
+  "aum": "$157M",
+  "age": "67–73",
+  "score": 89,
+  "why": "Principal Michael Smith (est. age 67–73) holds 75–100% of the firm with 43 years in the industry. Behavioral signal extraction has not yet run for this firm; the score rests on demographics, ownership and tenure only. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 90,
+   "Ownership concentration": 90,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Michael Maurice Smith (est. 67–73)",
+   "Age estimate": "single-source",
+   "SEC-registered": "2022",
+   "AUM (ADV)": "$157M",
+   "Accounts": "529",
+   "Employees": "7",
+   "Ownership": "75–100%",
+   "CRD": "113954"
+  },
+  "evidence": [
+   [
+    "2026-03-23",
+    "Form ADV filing: Michael Maurice Smith listed as control person, ownership 75–100% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1983",
+    "Career anchor (exam): earliest regulatory record → est. age 67–73",
+    "SEC IAPD"
+   ]
+  ]
+ },
+ {
+  "rank": 11,
+  "name": "Immaculate Wealth Management, LLC",
+  "city": "Mesa, AZ",
+  "aum": "$141M",
+  "age": "64–70",
+  "score": 89,
+  "why": "Principal Mark Rauguth (est. age 64–70) holds 75–100% of the firm with 40 years in the industry. Behavioral signal extraction has not yet run for this firm; the score rests on demographics, ownership and tenure only. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 90,
+   "Ownership concentration": 90,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Mark Edward Rauguth (est. 64–70)",
+   "Age estimate": "corroborated",
+   "SEC-registered": "2025",
+   "AUM (ADV)": "$141M",
+   "Accounts": "796",
+   "Employees": "2",
+   "Ownership": "75–100%",
+   "CRD": "167657"
+  },
+  "evidence": [
+   [
+    "2026-03-02",
+    "Form ADV filing: Mark Edward Rauguth listed as control person, ownership 75–100% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1986",
+    "Career anchor (exam): earliest regulatory record → est. age 64–70",
+    "SEC IAPD"
+   ]
+  ]
+ },
+ {
+  "rank": 12,
+  "name": "Dynamic Wealth Advisors",
+  "city": "Surprise, AZ",
+  "aum": "$140M",
+  "age": "62–68",
+  "score": 89,
+  "why": "Principal Adam Carlini (est. age 62–68) holds 75–100% of the firm with 38 years in the industry. Behavioral signal extraction has not yet run for this firm; the score rests on demographics, ownership and tenure only. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 90,
+   "Ownership concentration": 90,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Adam Charles Carlini (est. 62–68)",
+   "Age estimate": "corroborated",
+   "SEC-registered": "2022",
+   "AUM (ADV)": "$140M",
+   "Accounts": "829",
+   "Employees": "4",
+   "Ownership": "75–100%",
+   "CRD": "169792"
+  },
+  "evidence": [
+   [
+    "2025-06-30",
+    "Form ADV filing: Adam Charles Carlini listed as control person, ownership 75–100% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1988",
+    "Career anchor (exam): earliest regulatory record → est. age 62–68",
+    "SEC IAPD"
+   ]
+  ]
+ },
+ {
+  "rank": 13,
+  "name": "Alpha Fiduciary",
+  "city": "Scottsdale, AZ",
+  "aum": "$114M",
+  "age": "62–68",
+  "score": 89,
+  "why": "Principal Arthur Doglione (est. age 62–68) holds 75–100% of the firm with 38 years in the industry. Behavioral signal extraction has not yet run for this firm; the score rests on demographics, ownership and tenure only. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 90,
+   "Ownership concentration": 90,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Arthur Todd Doglione (est. 62–68)",
+   "Age estimate": "corroborated",
+   "SEC-registered": "2007",
+   "AUM (ADV)": "$114M",
+   "Accounts": "220",
+   "Employees": "4",
+   "Ownership": "75–100%",
+   "CRD": "144720"
+  },
+  "evidence": [
+   [
+    "2026-04-24",
+    "Form ADV filing: Arthur Todd Doglione listed as control person, ownership 75–100% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1988",
+    "Career anchor (exam): earliest regulatory record → est. age 62–68",
+    "SEC IAPD"
+   ]
+  ]
+ },
+ {
+  "rank": 14,
+  "name": "Biltmore Wealth Management, LLC",
+  "city": "Tempe, AZ",
+  "aum": "$440M",
+  "age": "66–72",
+  "score": 85,
+  "why": "Principal Timothy Carpenter (est. age 66–72) holds 50–75% of the firm with 42 years in the industry. Longitudinal ADV signal extraction has run for this firm — see dated evidence below. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 90,
+   "Ownership concentration": 75,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Timothy Alan Carpenter (est. 66–72)",
+   "Age estimate": "corroborated",
+   "SEC-registered": "2015",
+   "AUM (ADV)": "$440M",
+   "Accounts": "639",
+   "Employees": "4",
+   "Ownership": "50–75%",
+   "CRD": "151365"
+  },
+  "evidence": [
+   [
+    "2026-02-17",
+    "Form ADV filing: Timothy Alan Carpenter listed as control person, ownership 50–75% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1984",
+    "Career anchor (exam): earliest regulatory record → est. age 66–72",
+    "SEC IAPD"
+   ],
+   [
+    "2026-02-17",
+    "[iar_departures] 5B1 advisory-function employees 2 (2015-02-13) -> 3 (2026-02-17) across 25 filings; no declines",
+    "SEC ADV filings (longitudinal)"
+   ],
+   [
+    "2026-02-17",
+    "[headcount_aum_decline] employees ? (2012-01-24) -> 4 (2026-02-17); AUM $88M -> $440M",
+    "SEC ADV filings (longitudinal)"
+   ],
+   [
+    "2026-02-17",
+    "[office_closure] no Schedule D 1.F rows in any of 32 filings -> single-office firm throughout (roster observable, trivially constant)",
+    "SEC ADV filings (longitudinal)"
+   ]
+  ]
+ },
+ {
+  "rank": 15,
+  "name": "Intrinsic Wealth Counsel, Inc.",
+  "city": "Tempe, AZ",
+  "aum": "$345M",
+  "age": "67–73",
+  "score": 85,
+  "why": "Principal Cornelius Zutphen (est. age 67–73) holds 50–75% of the firm with 42 years in the industry. Longitudinal ADV signal extraction has run for this firm — see dated evidence below. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 90,
+   "Ownership concentration": 75,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Cornelius Henry Van Zutphen (est. 67–73)",
+   "Age estimate": "single-source",
+   "SEC-registered": "1984",
+   "AUM (ADV)": "$345M",
+   "Accounts": "696",
+   "Employees": "7",
+   "Ownership": "50–75%",
+   "CRD": "105022"
+  },
+  "evidence": [
+   [
+    "2026-04-03",
+    "Form ADV filing: Cornelius Henry Van Zutphen listed as control person, ownership 50–75% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1984",
+    "Career anchor (exam): earliest regulatory record → est. age 67–73",
+    "SEC IAPD"
+   ],
+   [
+    "2026-04-03",
+    "[iar_departures] 5B1 advisory-function employees 3 (2013-03-26) -> 3 (2026-04-03) across 35 filings; 2 decline step(s)",
+    "SEC ADV filings (longitudinal)"
+   ],
+   [
+    "2026-04-03",
+    "[headcount_aum_decline] employees ? (2012-03-28) -> 7 (2026-04-03); AUM $91M -> $345M",
+    "SEC ADV filings (longitudinal)"
+   ],
+   [
+    "2026-04-03",
+    "[office_closure] offices (main+branches) 2 (2013-08-22) -> 2 (2013-08-22) -> 2 (2014-02-28) -> 2 (2015-03-30) -> 2 (2016-03-23) -> 2 (2017-03-27) -> 2 (2017-05-01) -> 2 (2017-05",
+    "SEC ADV filings (longitudinal)"
+   ]
+  ]
+ },
+ {
+  "rank": 16,
+  "name": "Taylor Frigon Capital Management LLC",
+  "city": "Scottsdale, AZ",
+  "aum": "$233M",
+  "age": "64–70",
+  "score": 85,
+  "why": "Principal Gerard Frigon (est. age 64–70) holds 50–75% of the firm with 39 years in the industry. Behavioral signal extraction has not yet run for this firm; the score rests on demographics, ownership and tenure only. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 90,
+   "Ownership concentration": 75,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Gerard Joseph Frigon (est. 64–70)",
+   "Age estimate": "single-source",
+   "SEC-registered": "2007",
+   "AUM (ADV)": "$233M",
+   "Accounts": "471",
+   "Employees": "11",
+   "Ownership": "50–75%",
+   "CRD": "142617"
+  },
+  "evidence": [
+   [
+    "2026-03-24",
+    "Form ADV filing: Gerard Joseph Frigon listed as control person, ownership 50–75% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1987",
+    "Career anchor (exam): earliest regulatory record → est. age 64–70",
+    "SEC IAPD"
+   ]
+  ]
+ },
+ {
+  "rank": 17,
+  "name": "Financial Life Planners",
+  "city": "Tempe, AZ",
+  "aum": "$208M",
+  "age": "64–70",
+  "score": 85,
+  "why": "Principal Cynthia Fick (est. age 64–70) holds 50–75% of the firm with 39 years in the industry. Longitudinal ADV signal extraction has run for this firm — see dated evidence below. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 90,
+   "Ownership concentration": 75,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Cynthia Kay Fick (est. 64–70)",
+   "Age estimate": "corroborated",
+   "SEC-registered": "2023",
+   "AUM (ADV)": "$208M",
+   "Accounts": "779",
+   "Employees": "7",
+   "Ownership": "50–75%",
+   "CRD": "129415"
+  },
+  "evidence": [
+   [
+    "2026-03-30",
+    "Form ADV filing: Cynthia Kay Fick listed as control person, ownership 50–75% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1987",
+    "Career anchor (exam): earliest regulatory record → est. age 64–70",
+    "SEC IAPD"
+   ],
+   [
+    "2026-03-30",
+    "[iar_departures] 5B1 advisory-function employees 4 (2023-03-31) -> 3 (2026-03-30) across 11 filings; 1 decline step(s)",
+    "SEC ADV filings (longitudinal)"
+   ],
+   [
+    "2026-03-30",
+    "[headcount_aum_decline] employees 4 (2023-03-31) -> 7 (2026-03-30); AUM $113M -> $208M",
+    "SEC ADV filings (longitudinal)"
+   ],
+   [
+    "2026-03-30",
+    "[office_closure] offices (main+branches) 3 (2023-03-31) -> 3 (2023-10-23) -> 2 (2024-03-26) -> 2 (2024-08-27) -> 2 (2025-01-28) -> 2 (2025-02-11) -> 2 (2025-02-14) -> 2 (2025-04",
+    "SEC ADV filings (longitudinal)"
+   ]
+  ]
+ },
+ {
+  "rank": 18,
+  "name": "Union Capital Company",
+  "city": "Tucson, AZ",
+  "aum": "$150M",
+  "age": "64–70",
+  "score": 85,
+  "why": "Principal Francisco Almada (est. age 64–70) holds 50–75% of the firm with 39 years in the industry. Behavioral signal extraction has not yet run for this firm; the score rests on demographics, ownership and tenure only. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 90,
+   "Ownership concentration": 75,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Francisco B Almada (est. 64–70)",
+   "Age estimate": "single-source",
+   "SEC-registered": "2021",
+   "AUM (ADV)": "$150M",
+   "Accounts": "414",
+   "Employees": "13",
+   "Ownership": "50–75%",
+   "CRD": "110301"
+  },
+  "evidence": [
+   [
+    "2026-03-30",
+    "Form ADV filing: Francisco B Almada listed as control person, ownership 50–75% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1987",
+    "Career anchor (exam): earliest regulatory record → est. age 64–70",
+    "SEC IAPD"
+   ]
+  ]
+ },
+ {
+  "rank": 19,
+  "name": "Intelligent Capitalworks",
+  "city": "Scottsdale, AZ",
+  "aum": "$377M",
+  "age": "58–64",
+  "score": 81,
+  "why": "Principal Vincent Rossi (est. age 58–64) holds 75–100% of the firm with 34 years in the industry. Behavioral signal extraction has not yet run for this firm; the score rests on demographics, ownership and tenure only. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 75,
+   "Ownership concentration": 90,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Vincent Harl Rossi (est. 58–64)",
+   "Age estimate": "uncorroborated",
+   "SEC-registered": "2005",
+   "AUM (ADV)": "$377M",
+   "Accounts": "341",
+   "Employees": "6",
+   "Ownership": "75–100%",
+   "CRD": "135081"
+  },
+  "evidence": [
+   [
+    "2026-03-31",
+    "Form ADV filing: Vincent Harl Rossi listed as control person, ownership 75–100% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1992",
+    "Career anchor (exam): earliest regulatory record → est. age 58–64",
+    "SEC IAPD"
+   ]
+  ]
+ },
+ {
+  "rank": 20,
+  "name": "Stonecrest Wealth Management, Inc",
+  "city": "Chandler, AZ",
+  "aum": "$376M",
+  "age": "58–64",
+  "score": 81,
+  "why": "Principal Keith Mahan (est. age 58–64) holds 75–100% of the firm with 34 years in the industry. Behavioral signal extraction has not yet run for this firm; the score rests on demographics, ownership and tenure only. Score is illustrative — the composite is not yet validated against realized sales.",
+  "factors": {
+   "Owner age (est.)": 75,
+   "Ownership concentration": 90,
+   "Principal tenure": 85
+  },
+  "facts": {
+   "Principal": "Keith Casey Mahan (est. 58–64)",
+   "Age estimate": "corroborated",
+   "SEC-registered": "2020",
+   "AUM (ADV)": "$376M",
+   "Accounts": "1083",
+   "Employees": "4",
+   "Ownership": "75–100%",
+   "CRD": "311404"
+  },
+  "evidence": [
+   [
+    "2026-02-06",
+    "Form ADV filing: Keith Casey Mahan listed as control person, ownership 75–100% (Schedule A/B)",
+    "SEC IAPD · Form ADV"
+   ],
+   [
+    "1992",
+    "Career anchor (exam): earliest regulatory record → est. age 58–64",
+    "SEC IAPD"
+   ]
+  ]
+ }
+];
+
+const bandOf = s => s>=80 ? "ready" : s>=60 ? "warm" : "early";
+const bandLabel = {ready:"Ready", warm:"Warming", early:"Early"};
+const bandColor = {ready:"var(--ready)", warm:"var(--warm)", early:"var(--early)"};
+let bandFilter = "all";
+
+function setBand(btn){
+  document.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));
+  btn.classList.add("on");
+  bandFilter = btn.dataset.band;
+  render();
+}
+
+function toggleEntry(el){ el.closest(".entry").classList.toggle("open"); }
+
+function render(){
+  const rows = FIRMS.filter(f=>bandFilter==="all"||bandOf(f.score)===bandFilter);
+  document.getElementById("list").innerHTML = rows.map(f=>{
+    const b = bandOf(f.score);
+    const factors = Object.entries(f.factors).map(([k,v])=>`
+      <div class="factor">
+        <div class="f-row"><b>${k}</b><span class="num">${v}</span></div>
+        <div class="track"><i style="width:${v}%;background:${bandColor[bandOf(v)]}"></i></div>
+      </div>`).join("");
+    const evidence = f.evidence.map(e=>`
+      <div class="ev-item"><time>${e[0]}</time><div><p>${e[1]}</p><div class="src">${e[2]}</div></div></div>`).join("");
+    const facts = Object.entries(f.facts).map(([k,v])=>`<li><span class="k">${k}</span><span class="v">${v}</span></li>`).join("");
+    return `
+    <div class="entry">
+      <div class="entry-row" onclick="toggleEntry(this)">
+        <div class="rank num">${String(f.rank).padStart(2,"0")}</div>
+        <div>
+          <div class="firm-name">${f.name}</div>
+          <div class="firm-meta">${f.city} &nbsp;·&nbsp; Principal est. age <b>${f.age}</b></div>
+        </div>
+        <div class="cell hide-m"><span class="cell-k">AUM</span><span class="cell-v num">${f.aum}</span></div>
+        <div class="cell hide-m"><span class="cell-k">Owner age</span><span class="cell-v num">${f.age}</span></div>
+        <div class="scoreblock">
+          <span class="score-big num" style="color:${bandColor[b]}">${f.score}</span>
+          <span class="band ${b}">${bandLabel[b]}</span>
+        </div>
+        <div class="caret">›</div>
+      </div>
+      <div class="profile">
+        <div class="assessment"><span class="lede">Assessment</span>${f.why}</div>
+        <div class="profile-grid">
+          <div>
+            <h3 class="section">Readiness factors</h3>
+            ${factors}
+            <div class="evidence">
+              <h3 class="section">Evidence</h3>
+              ${evidence}
+            </div>
+          </div>
+          <div>
+            <h3 class="section">Firm record</h3>
+            <ul class="facts">${facts}</ul>
+            <div class="profile-actions">
+              <button class="btn primary" onclick="event.stopPropagation();downloadPDF()">Export profile</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+  document.getElementById("count-note").textContent =
+    `Showing ${rows.length} of 111 scored firms (top 20 displayed; full universe of 123 in the CSV export).`;
+}
+
+render();
+
+/* ================= LOGIN ================= */
+let toured = false;
+function enterBrief(e){
+  e.preventDefault();
+  document.getElementById("login").classList.add("gone");
+  if(!toured) setTimeout(startTour, 600);
+}
+
+/* ================= WALKTHROUGH ================= */
+const TOUR = [
+  {sel:".brief-title", title:"This is the deliverable", pos:"below",
+   text:"Strata reads like the brief you hand a roll-up partner — a scored, evidenced answer to one question: which RIA owners are ready to sell?"},
+  {sel:".coverage", title:"Coverage at a glance", pos:"below",
+   text:"Every cycle we score the full universe — here, 111 real Arizona RIAs between $100M and $600M AUM, built from SEC bulk filings."},
+  {sel:".controls", title:"Three bands, one decision", pos:"below",
+   text:"Filter by band. Bands rank the illustrative composite — they are a triage view of real inputs, not a validated probability of sale."},
+  {sel:".entry:first-child .scoreblock", title:"The readiness score", pos:"below",
+   text:"A 0–100 illustrative composite of three inputs held for every firm: estimated owner age, ownership concentration, and tenure."},
+  {sel:".entry:first-child .assessment", title:"Evidence, not hunches", pos:"below", open:true,
+   text:"Expand any firm for the written assessment, factor breakdown, and dated evidence — every item traced to a dated SEC filing — no restricted sources."},
+  {sel:".export", title:"Take it with you", pos:"below",
+   text:"Export the ranked list as CSV or the whole brief as a PDF — ready to put in front of an investment committee."}
+];
+let tourIdx = -1;
+
+function startTour(){ toured = true; tourStep(0); }
+
+function tourStep(i){
+  if(i < 0) i = 0;
+  if(i >= TOUR.length){ endTour(); return; }
+  tourIdx = i;
+  const step = TOUR[i];
+  const firstEntry = document.querySelector(".entry");
+  if(step.open && firstEntry && !firstEntry.classList.contains("open")) firstEntry.classList.add("open");
+  const el = document.querySelector(step.sel);
+  if(!el){ endTour(); return; }
+  el.scrollIntoView({behavior:"smooth", block:"center"});
+  setTimeout(()=>placeTour(el, step), 420);
+}
+
+function placeTour(el, step){
+  const r = el.getBoundingClientRect(), pad = 10;
+  const spot = document.getElementById("spot");
+  spot.style.display = "block";
+  spot.style.left = (r.left - pad) + "px";
+  spot.style.top = (r.top - pad) + "px";
+  spot.style.width = (r.width + pad*2) + "px";
+  spot.style.height = (r.height + pad*2) + "px";
+
+  document.getElementById("tour-step-k").textContent = `Step ${tourIdx+1} of ${TOUR.length}`;
+  document.getElementById("tour-title").textContent = step.title;
+  document.getElementById("tour-text").textContent = step.text;
+  document.getElementById("tour-back").style.visibility = tourIdx === 0 ? "hidden" : "visible";
+  document.getElementById("tour-next").textContent = tourIdx === TOUR.length-1 ? "Finish" : "Next";
+
+  const pop = document.getElementById("tour-pop");
+  pop.style.display = "block";
+  const pw = pop.offsetWidth, ph = pop.offsetHeight, vw = innerWidth, vh = innerHeight;
+  let left = Math.min(Math.max(16, r.left), vw - pw - 16);
+  let top = r.bottom + pad + 14;
+  if(top + ph > vh - 16) top = Math.max(16, r.top - pad - ph - 14);
+  pop.style.left = left + "px";
+  pop.style.top = top + "px";
+}
+
+function endTour(){
+  tourIdx = -1;
+  document.getElementById("spot").style.display = "none";
+  document.getElementById("tour-pop").style.display = "none";
+}
+
+addEventListener("keydown", e=>{
+  if(tourIdx < 0) return;
+  if(e.key === "Escape") endTour();
+  if(e.key === "ArrowRight" || e.key === "Enter") tourStep(tourIdx+1);
+  if(e.key === "ArrowLeft") tourStep(tourIdx-1);
+});
+addEventListener("resize", ()=>{ if(tourIdx>=0){ const s=TOUR[tourIdx]; const el=document.querySelector(s.sel); if(el) placeTour(el,s); }});
+
+/* ================= EXPORTS ================= */
+function saveBlob(blob, filename){
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
+}
+
+const CSV_FULL = `rank,crd,firm,city,state,aum,principal,principal_title,est_age_band,age_basis,age_corroboration,tenure_years,ownership_band,sec_registered,employees,accounts,illustrative_score,band,behavioral_signals_extracted,status\n"1","140551","The Capital Advisory Group Advisory Services, LLC","Phoenix","AZ","$539M","Brett Allen Machtig","Managing Member","65–71","exam","single-source","40.6","75–100%","2008","7","1814","89","Ready","N","scored"\n"2","116069","Harmony Asset Management LLC","Scottsdale","AZ","$463M","Alan Edward Rosenfield","Managing Director And Chief Compliance Officer","67–73","exam","single-source","43.0","75–100%","2020","10","602","89","Ready","N","scored"\n"3","38747","Greenberg Financial Group","Tucson","AZ","$407M","Dean Steven Greenberg","Ceo","66–72","exam","single-source","41.7","75–100%","1990","10","1175","89","Ready","N","scored"\n"4","104621","Johnson Financial Advisors","Tempe","AZ","$301M","Philip Otho Johnson","Treasurer / Chairman (03/2026)","≥65","exam","corroborated","44.3","75–100%","2018","5","756","89","Ready","N","scored"\n"5","170181","Wj Wealth Management","Glendale","AZ","$262M","Jeffry Reeves Jones","Owner","66–72","exam","single-source","42.0","75–100%","2020","6","918","89","Ready","N","scored"\n"6","113809","Allied Portfolio Management, Inc.","Tucson","AZ","$240M","Steven Lewis Graham","President / Chief Compliance Officer","65–71","exam","corroborated","40.7","75–100%","2002","2","327","89","Ready","N","scored"\n"7","105968","Lane Brothers Investment Counsel","Prescott","AZ","$240M","Kevin Patrick Lane","President/Ceo","68–74","exam","corroborated","43.9","75–100%","2024","6","979","89","Ready","N","scored"\n"8","113938","Hillspring Financial, Inc.","Surprise","AZ","$186M","Kent Garry Forsey","President/Chief Compliance Officer","64–70","exam","single-source","39.9","75–100%","2024","4","652","89","Ready","N","scored"\n"9","317741","Wilkinson Wealth Management, LLC","Tucson","AZ","$165M","Elbridge Gerry Wilkinson","Principal & Chief Compliance Officer","63–69","exam","corroborated","38.6","75–100%","2021","2","890","89","Ready","N","scored"\n"10","113954","Profocus Incorporated","Phoenix","AZ","$157M","Michael Maurice Smith","President And Chief Compliance Officer","67–73","exam","single-source","42.7","75–100%","2022","7","529","89","Ready","N","scored"\n"11","167657","Immaculate Wealth Management, LLC","Mesa","AZ","$141M","Mark Edward Rauguth","Managing Member/Chief Compliance Officer","64–70","exam","corroborated","39.6","75–100%","2025","2","796","89","Ready","N","scored"\n"12","169792","Dynamic Wealth Advisors","Surprise","AZ","$140M","Adam Charles Carlini","President, Treasurer, Chief Investment Officer, Chief Compliance Officer","62–68","exam","corroborated","37.9","75–100%","2022","4","829","89","Ready","N","scored"\n"13","144720","Alpha Fiduciary","Scottsdale","AZ","$114M","Arthur Todd Doglione","Managing Member & President","62–68","exam","corroborated","37.8","75–100%","2007","4","220","89","Ready","N","scored"\n"14","151365","Biltmore Wealth Management, LLC","Tempe","AZ","$440M","Timothy Alan Carpenter","Managing Member","66–72","exam","corroborated","42.0","50–75%","2015","4","639","85","Ready","Y","scored"\n"15","105022","Intrinsic Wealth Counsel, Inc.","Tempe","AZ","$345M","Cornelius Henry Van Zutphen","President","67–73","exam","single-source","42.1","50–75%","1984","7","696","85","Ready","Y","scored"\n"16","142617","Taylor Frigon Capital Management LLC","Scottsdale","AZ","$233M","Gerard Joseph Frigon","Co Trustee","64–70","exam","single-source","39.2","50–75%","2007","11","471","85","Ready","N","scored"\n"17","129415","Financial Life Planners","Tempe","AZ","$208M","Cynthia Kay Fick","Owner/President","64–70","exam","corroborated","39.2","50–75%","2023","7","779","85","Ready","Y","scored"\n"18","110301","Union Capital Company","Tucson","AZ","$150M","Francisco B Almada","Director/President/Secretary/Shareholder","64–70","exam","single-source","39.4","50–75%","2021","13","414","85","Ready","N","scored"\n"19","135081","Intelligent Capitalworks","Scottsdale","AZ","$377M","Vincent Harl Rossi","President, Chief Investment Officer","58–64","exam","uncorroborated","33.5","75–100%","2005","6","341","81","Ready","N","scored"\n"20","311404","Stonecrest Wealth Management, Inc","Chandler","AZ","$376M","Keith Casey Mahan","President, Managing Principal, Chief Compliance Officer","58–64","exam","corroborated","33.5","75–100%","2020","4","1083","81","Ready","N","scored"\n"21","165183","Aim Capital","Scottsdale","AZ","$309M","Philip Lee Nagel","Owner, Managing Member","57–63","exam","corroborated","32.1","75–100%","2012","2","452","81","Ready","N","scored"\n"22","155597","Interwealth Management, LLC","Scottsdale","AZ","$298M","Denis J Ryan","Managing Director","60–66","exam","corroborated","35.2","75–100%","2019","5","769","81","Ready","N","scored"\n"23","306068","Graystone Partners Wealth Management, LLC","Tempe","AZ","$297M","Jerry Ray Gray","Owner","58–64","exam","single-source","33.8","75–100%","2020","5","998","81","Ready","N","scored"\n"24","168223","Meixler Investment Management, Ltd.","Show Low","AZ","$228M","Michael Charles Meixler","Chief Compliance Officer/Principal","57–63","exam","corroborated","32.7","75–100%","2013","1","941","81","Ready","N","scored"\n"25","165214","Intrinsic Value Partners, LLC","Phoenix","AZ","$221M","Carter Allen Pearl","Managing Member, Member, Ceo","57–63","exam","corroborated","32.3","75–100%","2013","3","193","81","Ready","Y","scored"\n"26","170087","Levin Funding Group LLC","Tucson","AZ","$215M","John David Levin","Trustee","61–67","exam","corroborated","36.1","75–100%","2022","2","165","81","Ready","N","scored"\n"27","172858","Mathis Wealth Management","Phoenix","AZ","$213M","Larry Lee Mathis","Managing Member And Chief Compliance Officer","58–64","exam","corroborated","33.5","75–100%","2023","5","703","81","Ready","N","scored"\n"28","169248","Scottsdale Wealth Planning, Inc.","Scottsdale","AZ","$172M","Paul Christopher Ohanian","Founder,  Chief Compliance Officer, Chief Executive Officer","61–67","exam","corroborated","37.0","75–100%","2018","2","312","81","Ready","N","scored"\n"29","154920","Bridgelight Capital LLC","Scottsdale","AZ","$136M","Gary Todd Stringer","Founder, Chief Executive Officer And Chief Compliance Officer","57–63","exam","corroborated","32.7","75–100%","2019","4","396","81","Ready","N","scored"\n"30","333381","Gps Investments","Scottsdale","AZ","$128M","William Joseph Jones","Founder And Chief Executive Officer","61–67","exam","corroborated","36.9","75–100%","2024","3","352","81","Ready","Y","scored"\n"31","319273","Financial Planning First, LLC","Tuscon","AZ","$114M","Matthew Paul Sullivan","President & Chief Compliance Officer","57–63","exam","corroborated","33.0","75–100%","2025","3","811","81","Ready","N","scored"\n"32","146054","Key Group Management, Inc.","Fountain Hills","AZ","$304M","Patrick Brian Murray","President And Chief Compliance Officer","61–67","exam","corroborated","36.8","50–75%","2019","5","337","78","Warming","N","scored"\n"33","170536","Wisdom Wealth Investment Advisors LLC","Phoenix","AZ","$139M","Blake Lepage Bottle","Managing Member And Chief Compliance Officer","60–66","exam","corroborated","35.9","50–75%","2026","2","678","78","Warming","N","scored"\n"34","174857","Buttonwood Capital Management (Bcm)","Scottsdale","AZ","$381M","Andrew Bart Sosnowitz","President / Chief Investment Officer/ Chief Compliance Officer","52–58","exam","corroborated","27.2","75–100%","2019","6","896","74","Warming","Y","scored"\n"35","284140","Treiberg Wealth Management","Tucson","AZ","$325M","Michael Lee Treiberg","President / Chief Compliance Officer","53–59","exam","corroborated","28.8","75–100%","2019","6","706","74","Warming","N","scored"\n"36","331395","One Wealth Capital Management, LLC","Scottsdale","AZ","$307M","Jeremy Paul Dicker","Trustee","52–58","exam","corroborated","27.6","75–100%","2024","6","548","74","Warming","N","scored"\n"37","173383","Stableford Capital LLC","Scottsdale","AZ","$305M","Andrew Joseph Brinkman","Managing Member","55–61","exam","single-source","30.1","75–100%","2014","4","254","74","Warming","N","scored"\n"38","299951","Corepath Wealth Partners LLC","Scottsdale","AZ","$261M","Mark Alan Bonnett","Managing Member","52–58","exam","single-source","27.8","75–100%","2019","8","884","74","Warming","N","scored"\n"39","289548","Nrg Wealth Management","Oro Valley","AZ","$242M","John Paul Davis","President & Chief Compliance Officer","56–62","exam","corroborated","31.6","75–100%","2019","5","418","74","Warming","N","scored"\n"40","289926","Preston Investments","Kingman","AZ","$198M","Scott David Preston","Managing Member/ Chief Compliance Officer","52–58","exam","corroborated","27.3","75–100%","2025","5","2526","74","Warming","N","scored"\n"41","285932","Spahn Wealth & Retirement LLC","Scottsdale","AZ","$181M","Kyle Robert Spahn","Managing Member, Chief Compliance Officer","53–59","exam","corroborated","28.3","75–100%","2022","2","283","74","Warming","N","scored"\n"42","128549","Wealth Engineering, LLC","Scottsdale","AZ","$171M","David John Fernandez","Managing Member/Cco","55–61","exam","corroborated","30.1","75–100%","2020","1","219","74","Warming","N","scored"\n"43","172113","Sierra Legacy Group","Scottsdale","AZ","$153M","Geoffrey Allen Grenert","Chief Compliance Officer And Managing Member","53–59","exam","uncorroborated","28.6","75–100%","2021","7","86","74","Warming","N","scored"\n"44","310819","Csp Financial Group LLC","Scottsdale","AZ","$119M","Charles Arthur Pettit","Managing Member & Chief Compliance Officer","56–62","exam","corroborated","31.8","75–100%","2023","20","777","74","Warming","N","scored"\n"45","298110","Juncture Wealth Strategies, LLC","Scottsdale","AZ","$474M","Barry Scott Rhonemus","Owner","54–60","exam","single-source","29.6","50–75%","2018","11","1122","70","Warming","N","scored"\n"46","157663","Vigilare Wealth Management LLC","Scottsdale","AZ","$331M","Jason Scott Polit","Owner, Managing Member, Chief Compliance Officer","53–59","exam","corroborated","28.0","50–75%","2011","6","452","70","Warming","N","scored"\n"47","298257","Capital Wealth Alliance, LLC","Scottsdale","AZ","$300M","Robert D Wong","Managing Partner/ Chief Compliance Officer","56–62","exam","corroborated","31.8","50–75%","2018","5","861","70","Warming","N","scored"\n"48","130762","Capital West Partners, LLC","Tucson","AZ","$300M","Jason John Ruther","Managing Partner","54–60","exam","corroborated","29.8","50–75%","2004","3","177","70","Warming","N","scored"\n"49","105913","Wall Capital Group, Inc.","Phoenix","AZ","$295M","David Jerome Wall","President And Chief Compliance Officer","≥55","exam","corroborated","34.5","50–75%","1992","5","1487","70","Warming","N","scored"\n"50","134509","Cole Wealth Management, LLC","Scottsdale","AZ","$181M","Martin Taylor Cole","Trustee","56–62","exam","corroborated","31.3","50–75%","2018","4","774","70","Warming","N","scored"\n"51","112923","Sterling Investment Management, LLC","Tucson","AZ","$409M","John Harman Payne","Managing Partner, Chief Investment Officer","≥51","exam","corroborated","30.5","75–100%","1995","8","399","66","Warming","N","scored"\n"52","285243","Releve Financial Group","Scottsdale","AZ","$256M","Dawn Deborah Jurkovich","Managing Member","50–56","exam","corroborated","25.2","75–100%","2016","7","1275","66","Warming","N","scored"\n"53","290719","Sharpepoint, LLC","Phoenix","AZ","$223M","Brian David Robinson","Managing Member","50–56","exam","single-source","25.4","75–100%","2020","5","1091","66","Warming","N","scored"\n"54","282017","Taurum Retirement Partners, LLC","Mesa","AZ","$156M","Robert Verlin Sollis","Managing Member & Chief Compliance Officer","51–57","exam","corroborated","26.2","75–100%","2024","2","422","66","Warming","N","scored"\n"55","282003","Pinnacle Peak Private Client Group, LLC","Scottsdale","AZ","$481M","Matthew Joseph Figueroa","Managing Director","52–58","exam","corroborated","27.3","25–50%","2017","6","1348","65","Warming","N","scored"\n"56","150148","Nova Financial Services","Tucson","AZ","$469M","Jacob Ray Kagele","Managing Member","48–54","exam","single-source","23.3","75–100%","2014","10","1388","62","Warming","N","scored"\n"57","143420","Exeter Financial, LLC","Scottsdale","AZ","$420M","Stephen Leon Harrison","Chief Compliance Officer, President","58–64","exam","corroborated","33.9","<5%","2007","6","693","62","Warming","N","scored"\n"58","116771","Heffernan Advisory, Inc.","Flagstaff","AZ","$410M","James Douglass Hoyt","President, Chief Compliance Officer","58–64","exam","single-source","33.1","<5%","2006","12","679","62","Warming","N","scored"\n"59","165839","Strategic Income Group LLC","Chandler","AZ","$362M","Michael John Gauthier","Owner","50–56","exam","corroborated","25.2","50–75%","2016","5","1211","62","Warming","N","scored"\n"60","157794","Tandem Wealth Advisors","Phoenix","AZ","$262M","Chester Angus Schaal","Trustee","47–53","exam","single-source","23.0","75–100%","2019","7","736","62","Warming","N","scored"\n"61","335594","Wlth Capital Management, LLC","Chandler","AZ","$230M","Cean Nicholas Kenefick-Rogers","Principal And Chief Compliance Officer","47–53","exam","corroborated","22.3","75–100%","2025","6","425","62","Warming","N","scored"\n"62","333708","Prosper Private Wealth","Mesa","AZ","$151M","Joshua Adam Gardner","Ceo & Cco","49–55","exam","corroborated","24.4","75–100%","2025","3","264","62","Warming","N","scored"\n"63","114148","Dew Wealth Management","Scottsdale","AZ","$465M","James Patrick Dew","Director","55–61","exam","single-source","30.5","F","2016","40","596","61","Warming","N","scored"\n"64","281160","Clarus Wealth Advisors, LLC","Peoria","AZ","$305M","Theresa Ann Fanning","Trustee","53–59","exam","single-source","28.1","F","2017","13","953","61","Warming","Y","scored"\n"65","288008","Invicta Financial Group","Yuma","AZ","$371M","Barry Douglas Todd","Chief Executive Officer/Owner","49–55","exam","uncorroborated","24.3","50–75%","2020","11","1683","59","Early","N","scored"\n"66","113245","Tribeca Financial, LLC","Mesa","AZ","$248M","Ryan J Ricedorff","Managing Member","48–54","exam","single-source","23.7","50–75%","2001","6","574","59","Early","Y","scored"\n"67","291218","Ascent Capital Partners, LLC","Scottsdale","AZ","$172M","Mark Anthony Pomeroy","Partner","48–54","exam","single-source","23.1","50–75%","2025","10","163","59","Early","N","scored"\n"68","306036","Optima Capital Management","Tempe","AZ","$150M","Jonathan Michael Elliott","Co-Founder & Chief Compliance Officer","48–54","exam","corroborated","23.1","50–75%","2025","4","427","59","Early","N","scored"\n"69","291070","Triton Wealth Management, Pllc","Sun City","AZ","$405M","William Chad Mitton","Managing Member","50–56","exam","corroborated","25.9","25–50%","2018","9","1729","58","Early","N","scored"\n"70","115994","R.H. Investment Group, LLC","Scottsdale","AZ","$238M","Ehren Mccain Haymore","Managing Member/Chief Compliance Officer","≥46","exam","corroborated","25.5","75–100%","2022","2","97","54","Early","N","scored"\n"71","334109","Westmark Wealth Management","Phoenix","AZ","$195M","Alexander Michael Kienle","Partner","48–54","exam","corroborated","23.0","25–50%","2025","4","1524","54","Early","Y","scored"\n"72","114030","Aio Financial, LLC","Tucson","AZ","$199M","William Michael Holliday","Owner Cco","≥42","exam","corroborated","21.1","75–100%","2020","4","197","50","Early","N","scored"\n"73","131808","Bradley Wealth LLC","Scottsdale","AZ","$197M","Michael Vern Bradley","Member/Manager/Chief Compliance Officer","≥44","exam","single-source","23.5","75–100%","2021","5","1006","50","Early","N","scored"\n"74","127517","Wealth Management Solutions","Scottsdale","AZ","$173M","David Scott Rosenthal","Chief Compliance Officer, Principal, Senior Financial Advisor, Managing Member","≥45","exam","corroborated","24.9","75–100%","2022","4","411","50","Early","Y","scored"\n"75","283013","17 Capital Partners, LLC","Phoenix","AZ","$246M","Jenna Lucille Biancavilla","Managing Member/Chief Compliance Officer","40–46","exam","corroborated","15.6","75–100%","2021","7","416","46","Early","N","scored"\n"76","226708","Bayntree Wealth Advisors, LLC","Scottsdale","AZ","$241M","Andrew Scott Rafal","Owner","39–45","exam","corroborated","15.0","75–100%","2021","13","1208","46","Early","N","scored"\n"77","298347","Babb Wealth Advisors LLC","Flagstaff","AZ","$209M","Travis Christopher Babb","Owner","42–48","exam","single-source","17.4","75–100%","2022","8","927","46","Early","N","scored"\n"78","132591","Vestpointe Wealth Management, LLC","Scottsdale","AZ","$166M","Joseph Ignatius Mccabe","Member And President/Chief Compliance Officer","44–55","emp","single-source","22.0","50–75%","2021","3","423","46","Early","N","scored"\n"79","311639","Wise Wealth Partners, LLC","Phoenix","AZ","$153M","Brian Joseph Rellihan","Chief Compliance Officer And Managing Member","43–49","exam","corroborated","18.7","75–100%","2024","2","210","46","Early","N","scored"\n"80","298408","Foothills Advisors, LLC","Cave Creek","AZ","$129M","Jeffrey Michael Jones","Managing Member/Cco","42–48","exam","corroborated","17.8","75–100%","2024","3","440","46","Early","N","scored"\n"81","307792","Form Prosperity Wealth Advisors, LLC","Chandler","AZ","$113M","Jeremy Robert Bain Mcclymonds","Managing Member/Cco","42–48","exam","corroborated","17.5","75–100%","2026","1","499","46","Early","N","scored"\n"82","155676","Kingdom Financial Group, LLC","Peoria","AZ","$521M","Steven David Fullerton","Owner","≥37","exam","single-source","16.2","50–75%","2018","51","3554","42","Early","N","scored"\n"83","116798","Eaton-Cambridge Inc.","Phoenix","AZ","$481M","Marc T Giannone","Partner And Chief Compliance Officer","40–46","exam","single-source","15.8","50–75%","2019","11","1075","42","Early","N","scored"\n"84","326261","Luminvest Wealth Management LLC","Scottsdale","AZ","$398M","Trent Robert White","Managing Member & Chief Compliance Officer","36–42","exam","uncorroborated","11.5","75–100%","2023","5","370","42","Early","N","scored"\n"85","164531","Strategy Financial Group","Phoenix","AZ","$367M","Calvin Peter Goetz","Member & Manager","≥35","exam","single-source","14.9","75–100%","2021","20","3820","42","Early","N","scored"\n"86","166808","Seros Wealth Partners","Gilbert","AZ","$359M","Jeremy Windell Smith","Member","44–50","exam","corroborated","19.2","50–75%","2021","10","1049","42","Early","N","scored"\n"87","306827","Attessa Capital LLC","Tucson","AZ","$344M","Matthew William Harrison","Owner","32–43","emp","corroborated","10.0","75–100%","2024","8","699","42","Early","N","scored"\n"88","282686","Harding Wealth, Inc.","Tempe","AZ","$213M","Adam Clark Harding","Principal / Chief Compliance Officer","39–45","exam","corroborated","14.9","75–100%","2022","4","573","42","Early","N","scored"\n"89","145943","Bledsoe Asset Management, LLC","Phoenix","AZ","$189M","Frank Ross Jackson","Manager, Chief Compliance Officer","≥31","exam","single-source","10.7","75–100%","2021","5","688","42","Early","N","scored"\n"90","318258","Ridgeline Private Wealth","Mesa","AZ","$173M","Caleb Will Huftalin","Director Of Wealth Management/Chief Compliance Officer","39–45","exam","corroborated","14.6","75–100%","2023","6","627","42","Early","N","scored"\n"91","339106","Lilliano Capital Management LLC","Phoenix","AZ","$168M","Jacob N. Pacini","Owner, Chief Investment Officer & Chief Compliance Officer","37–43","exam","corroborated","12.3","75–100%","2026","2","409","42","Early","Y","scored"\n"92","306180","Farnam Financial","Phoenix","AZ","$161M","Jonathan David Bird","Member, Cco","36–42","exam","corroborated","11.9","75–100%","2025","3","240","42","Early","N","scored"\n"93","332433","Martinsen Wealth Management","Tempe","AZ","$143M","Lane G Martinsen","Founder/Ceo","≥32","exam","single-source","11.6","75–100%","2024","19","846","42","Early","N","scored"\n"94","339660","Schulz Financial Group","Tucson","AZ","$115M","Mary Grace Schulz","Managing Member/Cco","≥32","exam","single-source","11.7","75–100%","2026","3","493","42","Early","N","scored"\n"95","285314","Spirit West Advisors, LLC","Scottsdale","AZ","$111M","Kevin Mckinley Schaefer","Chief Compliance Officer/Managing Member","41–46","exam","corroborated","16.0","50–75%","2025","1","566","42","Early","N","scored"\n"96","116933","Sage Financial Advisors Inc.","Scottsdale","AZ","$270M","Kelly Alan Christensen","Trustee & Beneficiary","≥48","exam","corroborated","27.9","F","2001","7","348","41","Early","N","scored"\n"97","121362","Gordian Advisors, LLC","Tucson","AZ","$265M","Denis Viktorovich Smirnov","Principal/Managing Member","46–52","exam","single-source","21.9","25–50%","2019","3","343","41","Early","N","scored"\n"98","128240","Templeton Financial Services Inc.","Chandler","AZ","$442M","Joshua Brandon Johnson","Chief Executive Officer, Chief Compliance Officer","≥26","exam","single-source","5.2","75–100%","2006","4","318","39","Early","Y","scored"\n"99","170368","Acute Investment Advisory","Mesa","AZ","$238M","Damon B. Roberts","Member","≥32","exam","corroborated","11.8","50–75%","2022","4","1605","39","Early","N","scored"\n"100","324410","Blakely Walters Wealth Management","Scottsdale","AZ","$174M","James Carlyle Blakely","Managing Partner","≥34","exam","corroborated","13.2","50–75%","2023","7","548","39","Early","N","scored"\n"101","332192","Degreen Private Wealth, LLC","Scottsdale","AZ","$133M","Sam Howard Degreen","Chief Executive Officer & Chief Compliance Officer","33–39","exam","corroborated","8.2","75–100%","2024","1","261","39","Early","N","scored"\n"102","318700","Suttle Crossland Wealth Advisors, LLC","Scottsdale","AZ","$101M","Curtis James Crossland","Managing Member","39–45","exam","corroborated","14.6","50–75%","2026","2","185","39","Early","N","scored"\n"103","325650","Ensign Advisory Partners LLC","Gilbert","AZ","$101M","Joshua R Kehm","Managing Member And Chief Compliance Officer","31–37","exam","corroborated","6.8","75–100%","2026","3","697","39","Early","N","scored"\n"104","284874","Clarity Wealth Management, L.L.C.","Gilbert","AZ","$237M","Richard Monnett Everhart","Partner","40–46","exam","corroborated","15.5","25–50%","2022","5","944","38","Early","N","scored"\n"105","312685","Southwest Investment Advisors, Inc.","Tucson","AZ","$387M","Richard John Zich","President, Cco","≥28","exam","single-source","7.1","50–75%","2020","5","1162","35","Early","N","scored"\n"106","328450","Sl Capital","Scottsdale","AZ","$230M","Zachary Stuart Brodt","Management Trustee","44–50","exam","single-source","19.8","F","2023","4","416","34","Early","N","scored"\n"107","168774","Arbor Wealth Management, LLC","Tempe","AZ","$138M","Joseph Christopher Arsenault","Managing Partner","36–47","emp","corroborated","14.9","25–50%","2025","2","331","34","Early","N","scored"\n"108","325721","Amplify Financial, LLC","Scottsdale","AZ","$231M","Aaron Paul Brodt","Chief Executive Officer","45–51","exam","corroborated","20.9","<5%","2023","7","1494","31","Early","N","scored"\n"109","337660","Luminescent Wealth Management, Inc.","Scottsdale","AZ","$127M","Trevor Ryan Scheid","Vice President","35–41","exam","corroborated","10.4","10–25%","2026","2","163","30","Early","N","scored"\n"110","316870","Asterozoa Management","Phoenix","AZ","$104M","Joseph Louis Hegener","Managing Member, Chief Investment Officer","≥27","exam","corroborated","7.0","25–50%","2021","4","3","30","Early","N","scored"\n"111","169566","Wt Wealth Management, LLC","Scottsdale","AZ","$419M","John Kenneth Heilner","Chief Investment Officer","≥35","exam","corroborated","14.5","<5%","2018","16","2734","24","Early","N","scored"\n"","306796","Northrim Adviser, LLC","Mesa","AZ","$556M","","","","","","","","2023","12","3","","","N","insufficient data — manual review"\n"","292690","Social Leverage Advisors, LLC","Scottsdale","AZ","$444M","","","","","","","","2022","7","11","","","N","insufficient data — manual review"\n"","323930","Heritage Family Offices, Llp","Scottsdale","AZ","$423M","","","","","","","","2022","13","1057","","","N","insufficient data — manual review"\n"","318330","Zenith Wealth Advisors","Scottsdale","AZ","$328M","","","","","","","","2022","4","314","","","N","insufficient data — manual review"\n"","309258","Treasure Investment Management, LLC","Scottsdale","AZ","$253M","","","","","","","","2020","4","339","","","N","insufficient data — manual review"\n"","325678","Accordant Investments LLC","Scottsdale","AZ","$186M","","","","","","","","2023","17","2","","","N","insufficient data — manual review"\n"","284148","C2C Wealth Management, LLC","Scottsdale","AZ","$180M","","","","","","","","2017","2","440","","","N","insufficient data — manual review"\n"","300435","Pravati Capital LLC","Scottsdale","AZ","$174M","","","","","","","","2021","11","5","","","N","insufficient data — manual review"\n"","326133","Trinity Capital Adviser LLC","Phoenix","AZ","$158M","","","","","","","","2024","106","2","","","N","insufficient data — manual review"\n"","143969","Fortress Financial Solutions, LLC","Tucson","AZ","$142M","","","","","","","","2024","10","723","","","N","insufficient data — manual review"\n"","112021","Saratoga Capital Management, LLC","Avondale","AZ","$139M","","","","","","","","1994","4","1","","","N","insufficient data — manual review"\n"","299658","Idx Advisors","Scottsdale","AZ","$128M","","","","","","","","2021","6","3","","","N","insufficient data — manual review"`;
+function downloadCSV(){
+  saveBlob(new Blob([CSV_FULL.replace(/\\n/g,"\n")], {type:"text/csv"}), "strata-ria-targets-az123.csv");
+}
+
+function downloadPDF(){
+  document.querySelectorAll(".entry").forEach(e=>e.classList.add("open"));
+  window.print();
+}
+</script>
+</body>
+</html>
