@@ -167,24 +167,6 @@
 
   <p class="sub"><b>Negative modifiers (C7):</b> LinkedIn activity, new location, awards, active hiring, rebrand, growth UCC. They are displayed, not scored, and lean on the same scraping/LinkedIn sources. Same legal profile as C2/C4; not predictors.</p>
 
-  <!-- IN-UI MOCK -->
-  <h2>Option: thread a light version into the demo UI</h2>
-  <p>Rather than a separate document, the same information can ride inside the demo using the mechanism the plan already has: the <b>Confidence Grade</b> and <b>evidence links</b>. Add one dimension: a <b>provenance tag</b> per reason code showing whether the signal is live-now, license-gated, or scraping-dependent. The demo stays honest without a second report.</p>
-
-  <div class="mock">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:8px;">
-      <b style="font-family:Georgia,serif;font-size:17px;">Hartwell Wealth Advisors</b>
-      <span><b style="color:var(--green);font-size:18px;">91</b> &nbsp;<span class="pill pg">READY</span></span>
-    </div>
-    <div style="font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;">Reason codes &nbsp;·&nbsp; <span class="tag live">LIVE</span> ship-ready &nbsp; <span class="tag lic">LICENSE</span> needs license &nbsp; <span class="tag scr">SCRAPE</span> contested source</div>
-    <div class="rc"><span class="tag live">LIVE</span> succession_gap_visible <span class="sub">· SEC ADV, free</span></div><br>
-    <div class="rc"><span class="tag live">LIVE</span> late_career_owner <span class="sub">· license date, free <i>(but weak predictor)</i></span></div><br>
-    <div class="rc"><span class="tag scr">SCRAPE</span> digital_decay_detected <span class="sub">· website/social scrape</span></div><br>
-    <div class="rc"><span class="tag scr">SCRAPE</span> key_man_departure <span class="sub">· LinkedIn / U5</span></div><br>
-    <div class="rc"><span class="tag lic">LICENSE</span> firm_history_ma <span class="sub">· FINRA BrokerCheck</span></div>
-  </div>
-  <p class="sub">At a glance the client sees the lead <i>and</i> that two of its strongest reason codes rest on contested sources and one on a license, so "here's the product, here's what it takes to ship it" is built into the view itself.</p>
-
   <div class="callout g">
     <h4>How to use this with the client</h4>
     <p>Lead with the demo (the capability is real and impressive). Hand this map alongside it as the honest "path to production": the green rows are shippable today, the amber/red rows are a licensing-and-legal budget line, and the predictive column is the candid statement that the model's bets still need a proper behavioral backtest. That framing sells judgment, not just a screenshot.</p>
